@@ -1,0 +1,26 @@
+.modificationRemove {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 7rem;
+	width: 80%;
+	margin: 0 auto;
+	padding: 1rem;
+    border-bottom: 1px solid rgb(151, 151, 151);
+}
+
+button.removeProduct {
+    height: 3rem;
+	width: 60%;
+    border: none;
+    border-radius: 2rem;
+    background-color: #F3CD6F;
+    cursor: pointer;
+    font-size: 1.5rem;
+	line-height: 2rem;
+}
+
+button.removeProduct:hover{
+	background-color: #f1c34f;
+}

@@ -1,0 +1,75 @@
+.list {
+	width: 80%;
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 1rem;
+	border-radius: 1rem;
+	box-shadow: 0 0 3px 0px black;
+	background-color: white;
+}
+
+.list .noProducts{
+	margin: auto 0;
+	text-align: center;
+	font-size: 2rem;
+	line-height: 5rem;
+}
+
+.summary {
+	display: flex;
+    justify-content: space-between;
+	width: 80%;
+	margin: 0 auto;
+	padding: 1rem;
+    line-height: 2rem;
+}
+
+.summary .title{
+    font-weight: bold;
+    font-size: 1.7rem;
+}
+
+.summary .amount{
+    font-size: 1.3rem;
+}
+
+.actions{
+	display: flex;
+    justify-content: flex-end;
+	width: 80%;
+	margin: 0 auto;
+	padding: 1rem;
+}
+
+.actions button{
+	height: 2rem;
+	margin-left: 0.5rem;
+	padding: 0.3rem 1rem;
+	border: none;
+	border-radius: 1rem;
+	background-color: #f3cd6f; 
+	line-height: 0.8rem;
+	font-size: 1rem;
+}
+
+.actions button:hover{
+	background-color: #f1c34f;
+	cursor: pointer;
+}
+
+button.isEmpty{
+	background-color: rgb(231, 231, 231);
+}
+
+button.isEmpty:hover{
+	background-color: rgb(231, 231, 231);
+	cursor: auto;
+}
+
+.maxQuantity{
+	width: 80%;
+	margin: 0 auto;
+	padding-left: 1rem;
+	color: red;
+	font-weight: bold;
+}

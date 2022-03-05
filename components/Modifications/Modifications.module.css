@@ -1,0 +1,18 @@
+.notAdmin {
+	text-align: center;
+	font-size: 1.5rem;
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+    justify-items: center;
+	width: 90%;
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 1rem;
+	border-radius: 1rem;
+	box-shadow: 0 0 3px 0px black;
+	background-color: white;
+}
+

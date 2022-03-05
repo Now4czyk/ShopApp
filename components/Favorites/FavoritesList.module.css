@@ -1,0 +1,18 @@
+.list {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	min-height: 10rem;
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 1rem;
+	border-radius: 1rem;
+	box-shadow: 0 0 3px 0px black;
+	background-color: white;
+}
+
+.list .noFavorites{
+	margin: auto 0;
+	text-align: center;
+	font-size: 2rem;
+}

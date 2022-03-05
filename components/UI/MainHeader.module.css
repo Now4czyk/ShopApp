@@ -1,0 +1,58 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	height: 5rem;
+	width: 100%;
+	max-width: 1500px;
+	margin: auto;
+	padding: 0 10rem;
+	background-color: rgb(59, 59, 59);
+	line-height: 5rem;
+	align-items: center;
+	font-weight: bold;
+	color: white;
+}
+
+span.counter {
+	margin-left: 0.6rem;
+	padding: 0.2rem 0.7rem;
+	border-radius: 1rem;
+	background-color: #f3cd6f;
+	color: black;
+}
+
+.title {
+	font-size: 30px;
+	cursor: pointer;
+}
+
+.actions {
+	font-size: 1.2rem;
+}
+
+.ul {
+	display: flex;
+	list-style: none;
+}
+
+.ul li {
+	width: 9rem;
+	height: 3rem;
+	border-right: 2px rgb(104, 104, 104) solid;
+	line-height: 3rem;
+	text-align: center;
+	cursor: pointer;
+}
+
+.ul li:last-child {
+	border: none;
+}
+
+.ul li:hover {
+	background-color: rgb(102, 102, 102);
+	color: white;
+}
+
+.ul li.usePerspective{
+	width: 13rem;
+}

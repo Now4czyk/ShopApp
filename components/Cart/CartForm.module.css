@@ -1,0 +1,55 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	margin: 0 auto;
+	padding: 0 1rem;
+}
+
+.inputField {
+	display: flex;
+	flex-direction: column;
+	width: 15rem;
+}
+
+.inputField input {
+	margin-bottom: 0.3rem;
+	height: 1.7rem;
+	border: 1px gray solid;
+	border-radius: 0.5rem;
+	font-size: 1rem;
+}
+
+.actions {
+	text-align: right;
+}
+
+.actions button {
+	height: 2rem;
+	margin-left: 0.5rem;
+	padding: 0.3rem 1rem;
+	border: none;
+	border-radius: 1rem;
+	background-color: #f3cd6f;
+	line-height: 0.8rem;
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+.actions button:hover {
+	background-color: #f1c34f;
+}
+
+.error{
+    color: red;
+    font-weight: bold;
+}
+
+button.isFormError{
+	background-color: rgb(231, 231, 231);
+}
+
+button.isFormError:hover{
+	background-color: rgb(231, 231, 231);
+	cursor: auto;
+}
