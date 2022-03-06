@@ -76,7 +76,7 @@ const ModificationAdd: React.FC = () => {
 				</button>
 			) : (
 				<form className={classes.form}>
-					<div className={classes.title}>Add a new Product</div>
+					<div className={classes.title}>Add a New Product</div>
 					<div className={classes.field}>
 						<label htmlFor='title'>Title:</label>
 						<input onChange={titleHandler} type='text' id='title'></input>

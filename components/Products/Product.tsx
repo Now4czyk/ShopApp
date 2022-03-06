@@ -28,20 +28,24 @@ const Product: React.FC<{
 	};
 
 	const addToFavoritesHandler = () => {
-		if (authData.isLoggedIn) {
-			dispatch(addToFavorites(product));
-		} else {
-			router.push('./auth');
-			dispatch(changeTryToAddSthValue(true));
+		if (!authData.isAdmin) {
+			if (authData.isLoggedIn) {
+				dispatch(addToFavorites(product));
+			} else {
+				router.push('./auth');
+				dispatch(changeTryToAddSthValue(true));
+			}
 		}
 	};
 
 	const removeFromFavoritesHandler = () => {
-		if (authData.isLoggedIn) {
-			dispatch(removeFromFavorites(product));
-		} else {
-			router.push('./auth');
-			dispatch(changeTryToAddSthValue(true));
+		if (!authData.isAdmin) {
+			if (authData.isLoggedIn) {
+				dispatch(removeFromFavorites(product));
+			} else {
+				router.push('./auth');
+				dispatch(changeTryToAddSthValue(true));
+			}
 		}
 	};
 

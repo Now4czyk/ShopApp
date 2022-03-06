@@ -28,9 +28,10 @@ type favoritesData = {
 	price: number;
 };
 
-const AuthForm: React.FC<{ carts: { id: string; cart: cartData[] }[]; favorites: {id: string; favorites: favoritesData[]}[] }> = (
-	props
-) => {
+const AuthForm: React.FC<{
+	carts: { id: string; cart: cartData[] }[];
+	favorites: { id: string; favorites: favoritesData[] }[];
+}> = (props) => {
 	const [isTouchedEmail, setIsTouchedEmail] = useState(false);
 	const [isTouchedPassword, setIsTouchedPassword] = useState(false);
 	const [isEmailValid, setIsEmailValid] = useState(true);
@@ -61,16 +62,9 @@ const AuthForm: React.FC<{ carts: { id: string; cart: cartData[] }[]; favorites:
 
 	const submissionHandler = (event: React.FormEvent) => {
 		event.preventDefault();
-		if (enteredEmail.includes('@') === true) {
-			setIsEmailValid(true);
-		} else {
-			setIsEmailValid(false);
-		}
-		if (enteredPassword.trim().length > 6) {
-			setIsPasswordValid(true);
-		} else {
-			setIsPasswordValid(false);
-		}
+		setIsEmailValid(enteredEmail.includes('@'));
+		setIsPasswordValid(enteredPassword.trim().length > 6);
+
 		if (
 			enteredEmail.includes('@') === true &&
 			enteredPassword.trim().length > 6
@@ -111,10 +105,12 @@ const AuthForm: React.FC<{ carts: { id: string; cart: cartData[] }[]; favorites:
 					router.push('/');
 					const cart = props.carts.find((cart) => cart.id === data.localId);
 					dispatch(setCart(cart?.cart));
-					const favorites = props.favorites.find((favorite) => favorite.id === data.localId);
+					const favorites = props.favorites.find(
+						(favorite) => favorite.id === data.localId
+					);
 					console.log(favorites);
 					dispatch(setFavorites(favorites?.favorites));
-					if(data.localId === 'GZZ23nXcQTVdWBunP2zYX1zhoXF3'){
+					if (data.localId === 'GZZ23nXcQTVdWBunP2zYX1zhoXF3') {
 						dispatch(setAdmin(true));
 					}
 				})

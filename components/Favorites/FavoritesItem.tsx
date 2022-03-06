@@ -1,9 +1,11 @@
 import classes from './FavoritesItem.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { favoritesInfo } from '../../store/store';
-import { addToFavorites, removeFromFavorites } from '../../store/Slices/favoriteSlice';
+import {
+	addToFavorites,
+	removeFromFavorites,
+} from '../../store/Slices/favoriteSlice';
 import { useRouter } from 'next/router';
-
 
 type data = {
 	url: string;
@@ -40,7 +42,11 @@ const FavoritesItem: React.FC<{ product: data }> = (props) => {
 
 	return (
 		<div className={classes.item}>
-			<img onClick={redirectHandler} className={classes.productImg} src={props.product.url} />
+			<img
+				onClick={redirectHandler}
+				className={classes.productImg}
+				src={props.product.url}
+			/>
 			<div className={classes.data}>
 				<div onClick={redirectHandler} className={classes.title}>
 					{props.product.title}

@@ -21,44 +21,26 @@ const CartForm: React.FC<{ onClickCancel: () => void }> = (props) => {
 
 	const nameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setEnteredName(event.target.value);
-		if (
-			event.target.value.length > 0 &&
-			/^[a-zA-Z]+$/.test(event.target.value)
-		) {
-			setIsValidName(true);
-		} else {
-			setIsValidName(false);
-		}
+		setIsValidName(
+			event.target.value.length > 0 && /^[a-zA-Z]+$/.test(event.target.value)
+		);
 	};
 	const streetHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setEnteredStreet(event.target.value);
-		if (event.target.value.length > 0) {
-			setIsValidStreet(true);
-		} else {
-			setIsValidStreet(false);
-		}
+		setIsValidStreet(event.target.value.length > 0);
 	};
 	const postalCodeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setEnteredPostalCode(event.target.value);
-		if (
+		setIsValidPostalCode(
 			event.target.value.replace(/ /g, '').length === 5 &&
-			/^(?=.*\d)[\d ]+$/.test(event.target.value)
-		) {
-			setIsValidPostalCode(true);
-		} else {
-			setIsValidPostalCode(false);
-		}
+				/^(?=.*\d)[\d ]+$/.test(event.target.value)
+		);
 	};
 	const cityHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setEnteredCity(event.target.value);
-		if (
-			event.target.value.length > 0 &&
-			/^[a-zA-Z]+$/.test(event.target.value)
-		) {
-			setIsValidCity(true);
-		} else {
-			setIsValidCity(false);
-		}
+		setIsValidCity(
+			event.target.value.length > 0 && /^[a-zA-Z]+$/.test(event.target.value)
+		);
 	};
 
 	const submissionHandler = (event: React.FormEvent) => {

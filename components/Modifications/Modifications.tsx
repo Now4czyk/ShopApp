@@ -1,6 +1,5 @@
 import classes from './Modifications.module.css';
 import ModificationAdd from './ModificationAdd';
-import ModificationRemove from './ModificationRemove';
 import ModificationChange from './ModificationChange';
 import { useSelector } from 'react-redux';
 import { authInfo } from '../../store/store';
@@ -15,7 +14,6 @@ const Modifications = () => {
 			{authData.isAdmin && (
 				<div className={classes.list}>
 					<ModificationAdd/>
-					<ModificationRemove />
 					<ModificationChange />
 				</div>
 			)}

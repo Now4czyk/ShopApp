@@ -1,0 +1,120 @@
+.item {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin: 0 auto;
+	padding: 1rem;
+	border-bottom: 1px solid rgb(151, 151, 151);
+}
+
+.itemData {
+	display: flex;
+	flex-direction: row;
+}
+
+.itemData img.productImg {
+	height: 7rem;
+	border-radius: 0.5rem;
+	box-shadow: 0 0 2px 0px black;
+	cursor: pointer;
+}
+
+.data {
+	width: 80%;
+	margin-left: 1rem;
+}
+
+.data .productTitle {
+	font-size: 1.3rem;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.data .productTitle .id {
+	margin-left: 0.5rem;
+	font-size: 1rem;
+	font-weight: normal;
+}
+
+.price {
+	margin-top: 0.5rem;
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 30%;
+}
+
+.actions button {
+	height: 2rem;
+	padding: 0.3rem 1rem;
+	border: none;
+	border-radius: 1rem;
+	background-color: #f3cd6f;
+	line-height: 0.8rem;
+	font-size: 1rem;
+}
+
+.actions button:hover {
+	background-color: #f1c34f;
+	cursor: pointer;
+}
+
+.item img.deleteImg {
+	display: block;
+	height: 2rem;
+	width: 2rem;
+	margin-left: 0.2rem;
+	border-radius: 0.5rem;
+	cursor: pointer;
+}
+
+.item img.deleteImg:hover {
+	background-color: lightgray;
+}
+
+.form {
+	display: block;
+}
+
+.editForm .field {
+	display: flex;
+	flex-direction: column;
+	width: 20rem;
+}
+
+.editForm .field label {
+	margin-top: 0.5rem;
+}
+
+.field input {
+	height: 2rem;
+	width: 20rem;
+	padding: 0 0.5rem;
+	border: 1px gray solid;
+	border-radius: 0.5rem;
+	line-height: 2rem;
+	font-size: 1rem;
+}
+
+.field .error {
+	color: red;
+	font-size: 1rem;
+	font-weight: bold;
+}
+
+ .actions {
+	display: flex;
+	justify-content: flex-end;
+	margin-left: auto;
+}
+
+.actions .cancel{
+	margin-left: 0.2rem;
+}
+
+.field label{
+	font-weight: bold;
+}
