@@ -10,13 +10,13 @@
 	text-align: center;
 }
 
-.warning{
+.warning {
 	text-align: left;
 }
 
-.errorMessage{
-    color: red;
-    font-weight: bold;
+.errorMessage {
+	color: red;
+	font-weight: bold;
 }
 
 .form {

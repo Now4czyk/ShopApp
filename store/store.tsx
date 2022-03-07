@@ -47,16 +47,5 @@ export const availableProductsInfo = (state: RootState) =>
 	state.availableProducts.data;
 export const authInfo = (state: RootState) => state.authData.data;
 export const cartInfo = (state: RootState) => state.cartData.data;
+export const cartLoggedOutInfo = (state: RootState) => state.cartData.cartLoggedOut;
 export const favoritesInfo = (state: RootState) => state.favoriteData.data;
-
-// import { configureStore } from '@reduxjs/toolkit';
-// import { availableProductsSliceReducer } from './Slices/availableProductsSlice';
-
-// export const store = configureStore({
-// 	reducer: { availableProducts: availableProductsSliceReducer },
-// });
-
-// type RootState = ReturnType<typeof store.getState>;
-
-// export const availableProductsInfo = (state: RootState) =>
-// 	state.availableProducts.availableProducts;

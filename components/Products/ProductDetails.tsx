@@ -1,11 +1,14 @@
-import { availableProductsInfo, authInfo } from '../../store/store';
+import {
+	availableProductsInfo,
+	authInfo,
+	favoritesInfo,
+} from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import classes from './ProductDetails.module.css';
 import { useState } from 'react';
-import { addToCart } from '../../store/Slices/cartSlice';
+import { addToCart, setCartLoggedOut } from '../../store/Slices/cartSlice';
 import { changeTryToAddSthValue } from '../../store/Slices/authSlice';
 import { useRouter } from 'next/router';
-import { favoritesInfo } from '../../store/store';
 import {
 	addToFavorites,
 	removeFromFavorites,
@@ -42,11 +45,15 @@ const ProductDetails: React.FC<{ id: string }> = (props) => {
 	};
 
 	const addToFavoritesHandler = () => {
-		dispatch(addToFavorites(product));
+		if (!authData.isAdmin) {
+			dispatch(addToFavorites(product));
+		}
 	};
 
 	const removeFromFavoritesHandler = () => {
-		dispatch(removeFromFavorites(product));
+		if (!authData.isAdmin) {
+			dispatch(removeFromFavorites(product));
+		}
 	};
 
 	const sizeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -59,8 +66,7 @@ const ProductDetails: React.FC<{ id: string }> = (props) => {
 
 	const submissionHandler = (event: React.FormEvent) => {
 		event.preventDefault();
-		if (authData.isLoggedIn && quantity + quantityInput < 1000) {
-			console.log('ordering....');
+		if (!authData.isAdmin) {
 			const data = {
 				url,
 				title,
@@ -70,14 +76,18 @@ const ProductDetails: React.FC<{ id: string }> = (props) => {
 				quantity: quantityInput,
 				size: sizeInput,
 			};
-			dispatch(addToCart(data));
-			setMaxQuantity(false);
-		} else if (authData.isLoggedIn && quantity + quantityInput >= 1000) {
-			setMaxQuantity(true);
-		} else {
-			dispatch(changeTryToAddSthValue(true));
-			router.push('/auth');
-			setMaxQuantity(false);
+			if (authData.isLoggedIn && quantity + quantityInput < 1000) {
+				console.log('ordering....');
+				dispatch(addToCart(data));
+				setMaxQuantity(false);
+			} else if (authData.isLoggedIn && quantity + quantityInput >= 1000) {
+				setMaxQuantity(true);
+			} else {
+				dispatch(setCartLoggedOut(data));
+				dispatch(changeTryToAddSthValue(true));
+				router.push('/auth');
+				setMaxQuantity(false);
+			}
 		}
 	};
 
@@ -124,7 +134,9 @@ const ProductDetails: React.FC<{ id: string }> = (props) => {
 								src='https://user-images.githubusercontent.com/29887220/113503333-7e4f6280-9531-11eb-8fcd-cd5f2b1903b1.png'></img>
 						)}
 					</div>
-					{maxQuantity && <p className={classes.maxQuantity}>Max quantity in Cart: 1000</p>}
+					{maxQuantity && (
+						<p className={classes.maxQuantity}>Max quantity in Cart: 1000</p>
+					)}
 				</form>
 			</div>
 		</div>

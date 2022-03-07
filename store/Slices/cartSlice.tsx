@@ -13,10 +13,20 @@ export type data = {
 
 interface initialValues {
 	data: data[];
+	cartLoggedOut: data;
 }
 
 const initialState: initialValues = {
 	data: [],
+	cartLoggedOut: {
+		url: '',
+		title: '',
+		price: 0,
+		id: '',
+		key: '',
+		quantity: 0,
+		size: '',
+	},
 };
 
 export const cartSlice = createSlice({
@@ -45,9 +55,8 @@ export const cartSlice = createSlice({
 			} else {
 				state.data.push(action.payload);
 			}
-			// console.log(current(state.data));
 		},
-		removeFromCart(state, action: PayloadAction<data>) {
+		removeOneFromCart(state, action: PayloadAction<data>) {
 			const index = state.data.findIndex(
 				(product) =>
 					product.id === action.payload.id &&
@@ -60,6 +69,16 @@ export const cartSlice = createSlice({
 				state.data.splice(index, 1);
 			}
 		},
+		removePositionFromCart(state, action: PayloadAction<data>) {
+			state.data = state.data.filter((product) => {
+				if (
+					action.payload.id === product.id &&
+					action.payload.size === product.size
+				)
+					return false;
+				return true;
+			});
+		},
 		clearCart(state) {
 			state.data = [];
 		},
@@ -68,10 +87,19 @@ export const cartSlice = createSlice({
 				state.data = action.payload;
 			}
 		},
+		setCartLoggedOut(state, action: PayloadAction<data>) {
+			state.cartLoggedOut = action.payload;
+		},
 	},
 });
 
 export const cartReducer = cartSlice.reducer;
 
-export const { addToCart, removeFromCart, clearCart, setCart } =
-	cartSlice.actions;
+export const {
+	addToCart,
+	removeOneFromCart,
+	removePositionFromCart,
+	clearCart,
+	setCart,
+	setCartLoggedOut,
+} = cartSlice.actions;

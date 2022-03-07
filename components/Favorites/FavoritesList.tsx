@@ -7,8 +7,12 @@ const FavoritesList = () => {
 	const favoritesData = useSelector(favoritesInfo);
 	return (
 		<div className={classes.list}>
-			{favoritesData.map(product=><FavoritesItem product={product}/>)}
-			{favoritesData.length===0 && <p className={classes.noFavorites}>There are no favorite products</p>}
+			{favoritesData.map((product) => (
+				<FavoritesItem key={product.id} product={product} />
+			))}
+			{favoritesData.length === 0 && (
+				<p className={classes.noFavorites}>There are no favorite products</p>
+			)}
 		</div>
 	);
 };

@@ -6,9 +6,13 @@ import {
 	changeTryToAddSthValue,
 	setAdmin,
 } from '../../store/Slices/authSlice';
-import { authInfo } from '../../store/store';
+import { authInfo, cartLoggedOutInfo } from '../../store/store';
 import { useRouter } from 'next/router';
-import { setCart } from '../../store/Slices/cartSlice';
+import {
+	setCart,
+	addToCart,
+	setCartLoggedOut,
+} from '../../store/Slices/cartSlice';
 import { setFavorites } from '../../store/Slices/favoriteSlice';
 
 type cartData = {
@@ -41,6 +45,7 @@ const AuthForm: React.FC<{
 	const [isLogin, setIsLogin] = useState(true);
 	const dispatch = useDispatch();
 	const authData = useSelector(authInfo);
+	const cartLoggedOutData = useSelector(cartLoggedOutInfo);
 	const router = useRouter();
 
 	const emailInput = useRef<HTMLInputElement>(null);
@@ -100,19 +105,32 @@ const AuthForm: React.FC<{
 					}
 				})
 				.then((data) => {
-					dispatch(changeTryToAddSthValue(false));
 					dispatch(login(data.localId));
-					router.push('/');
 					const cart = props.carts.find((cart) => cart.id === data.localId);
 					dispatch(setCart(cart?.cart));
+					if (authData.tryToAddSthBeingLoggedOut) {
+						dispatch(addToCart(cartLoggedOutData));
+						dispatch(changeTryToAddSthValue(false));
+						dispatch(
+							setCartLoggedOut({
+								url: '',
+								title: '',
+								price: 0,
+								id: '',
+								key: '',
+								quantity: 0,
+								size: '',
+							})
+						);
+					}
 					const favorites = props.favorites.find(
 						(favorite) => favorite.id === data.localId
 					);
-					console.log(favorites);
 					dispatch(setFavorites(favorites?.favorites));
 					if (data.localId === 'GZZ23nXcQTVdWBunP2zYX1zhoXF3') {
 						dispatch(setAdmin(true));
 					}
+					router.push('/');
 				})
 				.catch((err) => {
 					alert(err.message);

@@ -1,41 +1,42 @@
 import { data, setCart } from '../../store/Slices/cartSlice';
 import classes from './CartItem.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '../../store/Slices/cartSlice';
+import { addToCart, removeOneFromCart, removePositionFromCart } from '../../store/Slices/cartSlice';
 import { useRouter } from 'next/router';
-import { cartInfo } from '../../store/store';
+import { authInfo, cartInfo } from '../../store/store';
 import { Dispatch, SetStateAction } from 'react';
-
 const CartItem: React.FC<{
 	product: data;
 	setMaxQuantity: Dispatch<SetStateAction<boolean>>;
 }> = (props) => {
 	const dispatch = useDispatch();
 	const router = useRouter();
+	const authData = useSelector(authInfo);
 	const cartData = useSelector(cartInfo);
 	const quantity = cartData.reduce((sum, product) => {
 		return sum + product.quantity;
 	}, 0);
 	const addProductHandler = () => {
-		const { url, title, price, id, key, size } = props.product;
-		const product = { url, title, price, id, key, quantity: 1, size };
-		if (product.quantity + quantity < 1000) {
-			dispatch(addToCart(product));
-			props.setMaxQuantity(false);
-		} else {
-			props.setMaxQuantity(true);
+		if (!authData.isAdmin) {
+			const { url, title, price, id, key, size } = props.product;
+			const product = { url, title, price, id, key, quantity: 1, size };
+			if (product.quantity + quantity < 1000) {
+				dispatch(addToCart(product));
+				props.setMaxQuantity(false);
+			} else {
+				props.setMaxQuantity(true);
+			}
 		}
 	};
 	const redirectHandler = () => {
 		router.push(`./${props.product.id}`);
 	};
 	const removeProductHandler = () => {
-		dispatch(removeFromCart(props.product));
+		dispatch(removeOneFromCart(props.product));
 		props.setMaxQuantity(false);
 	};
 	const removePositionHandler = () => {
-		const data = cartData.filter((product) => product.id !== props.product.id);
-		dispatch(setCart(data));
+		dispatch(removePositionFromCart(props.product))
 	};
 
 	return (
