@@ -23,13 +23,11 @@ export const favoriteSlice = createSlice({
 	reducers: {
 		addToFavorites(state, action: PayloadAction<data>) {
 			state.data.push(action.payload);
-			// console.log(current(state.data));
 		},
 		removeFromFavorites(state, action: PayloadAction<data>) {
 			state.data = state.data.filter(
 				(product) => product.id !== action.payload.id
 			);
-			// console.log(state.data);
 		},
 		clearFavorites(state) {
 			state.data = [];

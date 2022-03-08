@@ -4,6 +4,7 @@ import { cartInfo } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { clearCart } from '../../store/Slices/cartSlice';
+import axios from 'axios';
 
 const CartForm: React.FC<{ onClickCancel: () => void }> = (props) => {
 	const [enteredName, setEnteredName] = useState('');
@@ -68,17 +69,15 @@ const CartForm: React.FC<{ onClickCancel: () => void }> = (props) => {
 		};
 
 		if (isValidName && isValidStreet && isValidPostalCode && isValidCity) {
-			const response = fetch('/api/new-order', {
-				method: 'POST',
-				body: JSON.stringify({
-					order: data,
-				}),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
-			router.push('/thanks');
-			dispatch(clearCart());
+			axios
+				.post('/api/new-order', { order: data })
+				.then(() => {
+					router.push('/thanks');
+					dispatch(clearCart());
+				})
+				.catch((error) => {
+					alert(error.response.statusText);
+				});
 		}
 	};
 	return (

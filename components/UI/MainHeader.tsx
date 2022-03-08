@@ -6,6 +6,7 @@ import { changeTryToAddSthValue } from '../../store/Slices/authSlice';
 import { clearCart } from '../../store/Slices/cartSlice';
 import { authInfo, cartInfo, favoritesInfo } from '../../store/store';
 import { clearFavorites } from '../../store/Slices/favoriteSlice';
+import axios from 'axios';
 
 const MainHeader = () => {
 	const authData = useSelector(authInfo);
@@ -31,29 +32,30 @@ const MainHeader = () => {
 		dispatch(logout());
 		dispatch(setAdmin(false));
 		router.push('/');
-		const responseCart = fetch('/api/update-user-cart', {
-			method: 'POST',
-			body: JSON.stringify({
+
+		axios
+			.post('/api/update-user-cart', {
 				id: authData.localId,
 				cartData: cartData,
-			}),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
-		const responseFavorites = fetch('/api/update-user-favorites', {
-			method: 'POST',
-			body: JSON.stringify({
+			})
+			.then(() => {
+				dispatch(clearCart());
+			})
+			.catch((error) => {
+				alert(error.response.statusText);
+			});
+
+		axios
+			.post('/api/update-user-favorites', {
 				id: authData.localId,
 				favoritesData: favoritesData,
-			}),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
-
-		dispatch(clearCart());
-		dispatch(clearFavorites());
+			})
+			.then(() => {
+				dispatch(clearFavorites());
+			})
+			.catch((error) => {
+				alert(error.response.statusText);
+			});
 	};
 	const cartHandler = () => {
 		router.push('/cart');
@@ -64,9 +66,9 @@ const MainHeader = () => {
 	const userPerspectiveHandler = () => {
 		router.push('./');
 	};
-	const modifyHandler = ()=>{
-		router.push('./modification')
-	}
+	const modifyHandler = () => {
+		router.push('./modification');
+	};
 
 	const LiCart = () => {
 		return (

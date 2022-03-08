@@ -14,6 +14,7 @@ import {
 	setCartLoggedOut,
 } from '../../store/Slices/cartSlice';
 import { setFavorites } from '../../store/Slices/favoriteSlice';
+import axios from 'axios';
 
 type cartData = {
 	url: string;
@@ -83,28 +84,15 @@ const AuthForm: React.FC<{
 				url =
 					'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD4CeSe6H1d5ZNjzB_gqTz88JZ9MQbKJPU';
 			}
-			fetch(url, {
-				method: 'POST',
-				body: JSON.stringify({
+
+			axios
+				.post(url, {
 					email: enteredEmail,
 					password: enteredPassword,
 					returnSecureToken: true,
-				}),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			})
-				.then((response) => {
-					if (response.ok) {
-						return response.json();
-					} else {
-						return response.json().then((data) => {
-							let errorMessage = data.error.message;
-							throw new Error(errorMessage);
-						});
-					}
 				})
-				.then((data) => {
+				.then((response) => {
+					const data = response.data;
 					dispatch(login(data.localId));
 					const cart = props.carts.find((cart) => cart.id === data.localId);
 					dispatch(setCart(cart?.cart));
@@ -132,8 +120,8 @@ const AuthForm: React.FC<{
 					}
 					router.push('/');
 				})
-				.catch((err) => {
-					alert(err.message);
+				.catch((error) => {
+					alert(error.response.data.error.message);
 				});
 		}
 	};

@@ -1,6 +1,8 @@
 import classes from './ModificationChangeListItem.module.css';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import axios from 'axios';
+import { response } from 'express';
 
 const ModificationChangeListItem: React.FC<{
 	product: {
@@ -71,16 +73,14 @@ const ModificationChangeListItem: React.FC<{
 
 	const deleteHandler = () => {
 		console.log(props.product.id);
-		const response = fetch('/api/change-product', {
-			method: 'DELETE',
-			body: JSON.stringify({
-				id: props.product.id,
-			}),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
-		router.push('./');
+		axios
+			.delete('/api/change-product', { data: { id: props.product.id } })
+			.then(() => {
+				router.push('./');
+			})
+			.catch((error) => {
+				alert(error.response.statusText);
+			});
 	};
 
 	const formSubmission = (event: React.FormEvent) => {
@@ -94,17 +94,17 @@ const ModificationChangeListItem: React.FC<{
 				url: enteredUrl,
 				price: enteredPrice,
 			};
-			const response = fetch('/api/change-product', {
-				method: 'PUT',
-				body: JSON.stringify({
+			axios
+				.put('/api/change-product', {
 					id: props.product.id,
 					change: data,
-				}),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
-			router.push('./');
+				})
+				.then(() => {
+					router.push('./');
+				})
+				.catch((error) => {
+					alert(error.response.statusText);
+				});
 		}
 	};
 

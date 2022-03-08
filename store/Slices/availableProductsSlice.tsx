@@ -22,7 +22,6 @@ export const availableProductsSlice = createSlice({
 	initialState,
 	reducers: {
 		setAvailableProducts: (state, action: PayloadAction<any>) => {
-			// console.log(action.payload);
 			state.data = action.payload;
 		},
 	},

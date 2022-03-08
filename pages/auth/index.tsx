@@ -64,12 +64,8 @@ export async function getStaticProps() {
 	const client = await MongoClient.connect(
 		'mongodb+srv://Now4czyk:Kacpern30@cluster0.h0u5c.mongodb.net/ProductsDB?retryWrites=true&w=majority'
 	);
-	const db = client.db();
-	const cartsCollection = db.collection('Carts');
-	const carts = await cartsCollection.find().toArray();
-	const favoritesCollection = db.collection('Favorites');
-	const favorites = await favoritesCollection.find().toArray();
-
+	const carts = await client.db().collection('Carts').find().toArray();
+	const favorites = await client.db().collection('Favorites').find().toArray();
 	client.close();
 
 	return {

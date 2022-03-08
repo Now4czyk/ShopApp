@@ -1,5 +1,7 @@
 import classes from './ModificationAdd.module.css';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 
 const ModificationAdd: React.FC = () => {
 	const [isSubmitted, setIsSubmitted] = useState(false);
@@ -10,6 +12,7 @@ const ModificationAdd: React.FC = () => {
 	const [isValidTitle, setIsValidTitle] = useState(false);
 	const [isValidPrice, setIsValidPrice] = useState(false);
 	const [isValidUrl, setIsValidUrl] = useState(false);
+	const router = useRouter();
 
 	const sectionVisibilityHandler = () => {
 		setIsSectionVisible(!isSectionVisible);
@@ -51,18 +54,19 @@ const ModificationAdd: React.FC = () => {
 		event.preventDefault();
 		setIsSubmitted(true);
 		if (isValidTitle && isValidPrice && isValidUrl) {
-			const response = fetch('/api/new-product', {
-				method: 'POST',
-				body: JSON.stringify({
+			axios
+				.post('/api/new-product', {
 					title: enteredTitle,
 					url: enteredUrl,
 					price: enteredPrice,
-				}),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
-			setIsSectionVisible(!isSectionVisible);
+				})
+				.then(() => {
+					setIsSectionVisible(!isSectionVisible);
+					router.push('./');
+				})
+				.catch((error) => {
+					alert(error.response.statusText);
+				});
 		}
 	};
 
@@ -81,7 +85,10 @@ const ModificationAdd: React.FC = () => {
 						<label htmlFor='title'>Title:</label>
 						<input onChange={titleHandler} type='text' id='title'></input>
 						{isValidTitle === false && isSubmitted == true && (
-							<p className={classes.error}>{`Enter valid title(length <= 12)`}</p>
+							<p
+								className={
+									classes.error
+								}>{`Enter valid title(length <= 12)`}</p>
 						)}
 					</div>
 					<div className={classes.field}>

@@ -43,11 +43,8 @@ export async function getStaticProps() {
 	const client = await MongoClient.connect(
 		'mongodb+srv://Now4czyk:Kacpern30@cluster0.h0u5c.mongodb.net/ProductsDB?retryWrites=true&w=majority'
 	);
-	const db = client.db();
-	const productsCollection = db.collection('Products');
-	const products = await productsCollection.find().toArray();
+	const products = await client.db().collection('Products').find().toArray();
 	client.close();
-
 	return {
 		props: {
 			products: products.map((product) => ({
