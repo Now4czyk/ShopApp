@@ -1,0 +1,75 @@
+@import '../../scss/breakpoints';
+
+.product {
+	display: flex;
+	flex-direction: column;
+	height: 25rem;
+	width: 18rem;
+	margin: 2rem 1rem;
+	border-radius: 0.2rem;
+	background-color: white;
+	box-shadow: 0 0 4px 4px lightgray;
+	@include tablet {
+		height: 28.5rem;
+		width: 22rem;
+	}
+	@include mobile{
+		height: 72rem;
+		width: 50rem;
+		border-radius: 2rem;
+	}
+	.title {
+		display: flex;
+		justify-content: space-between;
+		width: 15rem;
+		margin: 0.5rem auto 0.5rem;
+		line-height: 2rem;
+		font-size: 1.6rem;
+		font-weight: bold;
+        @include tablet{
+            width: 17rem;
+			font-size: 2rem;
+		}
+		@include mobile{
+			width: 40rem;
+			margin-top: 1.5rem;
+			line-height: 4rem;
+			font-size: 4rem;
+		}
+		img.favorite {
+			height: 2rem;
+			width: 2rem;
+			cursor: pointer;
+			@include mobile{
+				height: 5rem;
+				width: 5rem;
+			}
+		}
+	}
+	.price {
+		margin-left: 1.5rem;
+		font-size: 1.2rem;
+        @include tablet{
+            margin-left: 2.5rem;
+			font-size: 1.3rem;
+		}
+		@include mobile{
+			margin-left: 5rem;
+			font-size: 2.8rem;
+		}
+	}
+	img.productImg {
+		height: 20rem;
+		width: 15rem;
+		margin: 0 auto;
+		cursor: pointer;
+		@include tablet {
+			height: 23rem;
+			width: 17rem;
+		}
+		@include mobile{
+			height: 58rem;
+			width: 40rem;
+		}
+	}
+}

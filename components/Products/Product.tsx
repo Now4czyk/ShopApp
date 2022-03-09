@@ -1,13 +1,12 @@
-import classes from './Product.module.css';
+import classes from './_Product.module.scss';
 import { useRouter } from 'next/router';
-import { favoritesInfo } from '../../store/store';
 import { useSelector, useDispatch } from 'react-redux';
+import { authInfo, favoritesInfo } from '../../store/store';
+import { changeTryToAddSthValue } from '../../store/Slices/authSlice';
 import {
 	addToFavorites,
 	removeFromFavorites,
 } from '../../store/Slices/favoriteSlice';
-import { authInfo } from '../../store/store';
-import { changeTryToAddSthValue } from '../../store/Slices/authSlice';
 
 const Product: React.FC<{
 	url: string;

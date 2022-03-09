@@ -1,3 +1,5 @@
+@import '../../scss/breakpoints';
+
 .list {
 	display: flex;
 	flex-direction: column;
@@ -9,10 +11,15 @@
 	border-radius: 1rem;
 	box-shadow: 0 0 3px 0px black;
 	background-color: white;
-}
-
-.list .noFavorites{
-	margin: auto 0;
-	text-align: center;
-	font-size: 2rem;
+	@include mobile {
+		width: 100%;
+	}
+	.noFavorites {
+		margin: auto 0;
+		text-align: center;
+		font-size: 2rem;
+		@include mobile {
+			font-size: 3rem;
+		}
+	}
 }

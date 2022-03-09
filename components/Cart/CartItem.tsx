@@ -1,10 +1,15 @@
-import { data, setCart } from '../../store/Slices/cartSlice';
-import classes from './CartItem.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeOneFromCart, removePositionFromCart } from '../../store/Slices/cartSlice';
-import { useRouter } from 'next/router';
-import { authInfo, cartInfo } from '../../store/store';
+import classes from './_CartItem.module.scss';
 import { Dispatch, SetStateAction } from 'react';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { authInfo, cartInfo } from '../../store/store';
+import { data } from '../../store/Slices/cartSlice';
+import {
+	addToCart,
+	removeOneFromCart,
+	removePositionFromCart,
+} from '../../store/Slices/cartSlice';
+
 const CartItem: React.FC<{
 	product: data;
 	setMaxQuantity: Dispatch<SetStateAction<boolean>>;
@@ -36,7 +41,7 @@ const CartItem: React.FC<{
 		props.setMaxQuantity(false);
 	};
 	const removePositionHandler = () => {
-		dispatch(removePositionFromCart(props.product))
+		dispatch(removePositionFromCart(props.product));
 	};
 
 	return (
@@ -47,31 +52,35 @@ const CartItem: React.FC<{
 					onClick={redirectHandler}
 					src={props.product.url}
 				/>
-				<div className={classes.data}>
-					<div onClick={redirectHandler} className={classes.title}>
-						{props.product.title}
+				<div className={classes.side}>
+					<div className={classes.data}>
+						<div onClick={redirectHandler} className={classes.title}>
+							{props.product.title}
+						</div>
 						<span className={classes.id}>({props.product.id})</span>
-					</div>
 
-					<div className={classes.priceAndQuantity}>
-						${props.product.price}
-						<span className={classes.quantity}>x{props.product.quantity}</span>
-					</div>
+						<div className={classes.priceAndQuantity}>
+							${props.product.price}
+							<span className={classes.quantity}>
+								x{props.product.quantity}
+							</span>
+						</div>
 
-					<div className={classes.size}>{props.product.size}</div>
-				</div>
-				<div className={classes.actions}>
-					<button onClick={addProductHandler} className={classes.plus}>
-						+
-					</button>
-					<button onClick={removeProductHandler} className={classes.minus}>
-						-
-					</button>
-					<img
-						onClick={removePositionHandler}
-						className={classes.deleteImg}
-						src='https://cdn.iconscout.com/icon/free/png-256/close-1912235-1617704.png'
-					/>
+						<div className={classes.size}>{props.product.size}</div>
+					</div>
+					<div className={classes.actions}>
+						<button onClick={addProductHandler} className={classes.plus}>
+							+
+						</button>
+						<button onClick={removeProductHandler} className={classes.minus}>
+							-
+						</button>
+						<img
+							onClick={removePositionHandler}
+							className={classes.deleteImg}
+							src='https://cdn.iconscout.com/icon/free/png-256/close-1912235-1617704.png'
+						/>
+					</div>
 				</div>
 			</div>
 		</>

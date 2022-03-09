@@ -1,12 +1,17 @@
+@import '../../scss/breakpoints';
+
 .notAdmin {
 	text-align: center;
 	font-size: 1.5rem;
+	@include mobile {
+		font-size: 3rem;
+	}
 }
 
 .list {
 	display: flex;
 	flex-direction: column;
-    justify-items: center;
+	justify-items: center;
 	width: 90%;
 	max-width: 1000px;
 	margin: 0 auto;
@@ -14,5 +19,7 @@
 	border-radius: 1rem;
 	box-shadow: 0 0 3px 0px black;
 	background-color: white;
+	@include mobile {
+		width: 100%;
+	}
 }
-

@@ -1,15 +1,13 @@
-import classes from './ModificationChangeListItem.module.css';
+import classes from './_ModificationChangeListItem.module.scss';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { response } from 'express';
 
 const ModificationChangeListItem: React.FC<{
 	product: {
 		title: string;
 		url: string;
 		id: string;
-		key: string;
 		price: number;
 	};
 }> = (props) => {
@@ -116,25 +114,29 @@ const ModificationChangeListItem: React.FC<{
 					onClick={redirectHandler}
 					src={props.product.url}
 				/>
-				<div className={classes.data}>
-					<div className={classes.productTitle} onClick={redirectHandler}>
-						{props.product.title}
+				<div className={classes.side}>
+					<div className={classes.data}>
+						<div className={classes.productTitle} onClick={redirectHandler}>
+							{props.product.title}
+						</div>
 						<span className={classes.id}>({props.product.id})</span>
+						<div className={classes.price}>${props.product.price}</div>
 					</div>
-					<div className={classes.price}>${props.product.price}</div>
+					{!isEditing && (
+						<div className={classes.actions}>
+							<button
+								onClick={sectionVisibilityHandler}
+								className={classes.edit}>
+								Edit
+							</button>
+							<img
+								onClick={deleteHandler}
+								className={classes.deleteImg}
+								src='https://cdn.iconscout.com/icon/free/png-256/close-1912235-1617704.png'
+							/>
+						</div>
+					)}
 				</div>
-				{!isEditing && (
-					<div className={classes.actions}>
-						<button onClick={sectionVisibilityHandler} className={classes.edit}>
-							Edit
-						</button>
-						<img
-							onClick={deleteHandler}
-							className={classes.deleteImg}
-							src='https://cdn.iconscout.com/icon/free/png-256/close-1912235-1617704.png'
-						/>
-					</div>
-				)}
 			</div>
 
 			{isEditing && (
@@ -158,8 +160,8 @@ const ModificationChangeListItem: React.FC<{
 					</div>
 					<div className={classes.field}>
 						<label htmlFor='url'>Url:</label>
-						<div>1. Recommended size: 800x1155px</div>
-						<div>2. Https protocole required</div>
+						<div className={classes.note}>1. Https protocole required </div>
+						<div className={classes.note}>2. Recommended size: 800x1155px</div>
 						<input onChange={urlHandler} type='text' id='url'></input>
 						{isValidUrl === false && isSubmitted == true && (
 							<p className={classes.error}>Enter valid url</p>

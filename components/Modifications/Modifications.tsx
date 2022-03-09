@@ -1,8 +1,8 @@
-import classes from './Modifications.module.css';
-import ModificationAdd from './ModificationAdd';
-import ModificationChange from './ModificationChange';
+import classes from './_Modifications.module.scss';
 import { useSelector } from 'react-redux';
 import { authInfo } from '../../store/store';
+import ModificationAdd from './ModificationAdd';
+import ModificationChange from './ModificationChange';
 
 const Modifications = () => {
 	const authData = useSelector(authInfo);
@@ -13,7 +13,7 @@ const Modifications = () => {
 			)}
 			{authData.isAdmin && (
 				<div className={classes.list}>
-					<ModificationAdd/>
+					<ModificationAdd />
 					<ModificationChange />
 				</div>
 			)}

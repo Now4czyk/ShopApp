@@ -1,4 +1,4 @@
-import classes from './ModificationChange.module.css';
+import classes from './_ModificationChange.module.scss';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { availableProductsInfo } from '../../store/store';
@@ -28,11 +28,11 @@ const ModificationChange = () => {
 					</button>
 					{availableProductsData.map((product) => (
 						<ModificationChangeListItem
+							key={product.id}
 							product={{
 								title: product.title,
 								url: product.url,
 								id: product.id,
-								key: product.id,
 								price: product.price,
 							}}
 						/>

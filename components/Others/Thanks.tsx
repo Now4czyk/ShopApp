@@ -1,4 +1,4 @@
-import classes from './Thanks.module.css';
+import classes from './_Thanks.module.scss';
 
 const Thanks = () => {
 	return (

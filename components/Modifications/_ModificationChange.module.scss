@@ -1,0 +1,65 @@
+@import '../../scss/variables';
+@import '../../scss/breakpoints';
+
+.modificationChange {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-height: 7rem;
+	width: 80%;
+	margin: 0 auto;
+	padding: 1rem;
+	@include mobile {
+		width: 95%;
+	}
+	button.changeProduct {
+		height: 3rem;
+		width: 60%;
+		border: none;
+		border-radius: 2rem;
+		background-color: $button-color;
+		cursor: pointer;
+		font-size: 1.5rem;
+		line-height: 2rem;
+		@include mobile {
+			height: 4.5rem;
+			width: 40rem;
+			margin: 1rem;
+			border-radius: 2.5rem;
+			font-size: 3rem;
+		}
+		&:hover {
+			background-color: $button-clicked-color;
+		}
+	}
+	.title {
+		margin-bottom: 1rem;
+		text-align: center;
+		font-size: 1.5rem;
+		font-weight: bold;
+		@include mobile {
+			font-size: 3.5rem;
+		}
+	}
+	button.cancel {
+		height: 2rem;
+		margin-left: auto;
+		padding: 0.3rem 1rem;
+		border: none;
+		border-radius: 1rem;
+		background-color: $button-color;
+		line-height: 0.8rem;
+		font-size: 1rem;
+		@include mobile {
+			height: 4rem;
+			width: 10rem;
+			border-radius: 2rem;
+			font-size: 2.5rem;
+		}
+		&:hover {
+			background-color: $button-clicked-color;
+			cursor: pointer;
+		}
+	}
+}

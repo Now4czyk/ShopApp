@@ -1,20 +1,20 @@
-import classes from './AuthForm.module.css';
+import classes from './_AuthForm.module.scss';
 import { useState, useRef } from 'react';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
+import { authInfo, cartLoggedOutInfo } from '../../store/store';
 import {
-	login,
 	changeTryToAddSthValue,
+	login,
 	setAdmin,
 } from '../../store/Slices/authSlice';
-import { authInfo, cartLoggedOutInfo } from '../../store/store';
-import { useRouter } from 'next/router';
+import { setFavorites } from '../../store/Slices/favoriteSlice';
 import {
-	setCart,
 	addToCart,
+	setCart,
 	setCartLoggedOut,
 } from '../../store/Slices/cartSlice';
-import { setFavorites } from '../../store/Slices/favoriteSlice';
-import axios from 'axios';
 
 type cartData = {
 	url: string;

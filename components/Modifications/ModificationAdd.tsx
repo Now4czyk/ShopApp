@@ -1,4 +1,4 @@
-import classes from './ModificationAdd.module.css';
+import classes from './_ModificationAdd.module.scss';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
@@ -99,7 +99,9 @@ const ModificationAdd: React.FC = () => {
 						)}
 					</div>
 					<div className={classes.field}>
-						<label htmlFor='url'>Url(https protocole required):</label>
+						<label htmlFor='url'>Url:</label>
+						<div className={classes.note}>1. Https protocole required </div>
+						<div className={classes.note}>2. Recommended size: 800x1155px</div>
 						<input onChange={urlHandler} type='text' id='url'></input>
 						{isValidUrl === false && isSubmitted == true && (
 							<p className={classes.error}>Enter valid url</p>

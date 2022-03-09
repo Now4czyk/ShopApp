@@ -1,10 +1,10 @@
-import classes from './CartForm.module.css';
+import classes from './_CartForm.module.scss';
 import { useState } from 'react';
-import { cartInfo } from '../../store/store';
-import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import { clearCart } from '../../store/Slices/cartSlice';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { cartInfo } from '../../store/store';
+import { clearCart } from '../../store/Slices/cartSlice';
 
 const CartForm: React.FC<{ onClickCancel: () => void }> = (props) => {
 	const [enteredName, setEnteredName] = useState('');

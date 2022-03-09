@@ -1,4 +1,4 @@
-import classes from './ProductsList.module.css';
+import classes from './_ProductList.module.scss';
 import { useSelector } from 'react-redux';
 import { availableProductsInfo } from '../../store/store';
 import Product from './Product';

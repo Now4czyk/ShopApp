@@ -1,10 +1,10 @@
-import '../styles/globals.css';
+import '../scss/_globals.scss';
 import type { AppProps } from 'next/app';
-import Layout from '../components/UI/Layout';
-import store from '../store/store';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
+import store from '../store/store';
+import Layout from '../components/UI/Layout';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	let persistor = persistStore(store);

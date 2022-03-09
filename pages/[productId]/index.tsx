@@ -1,14 +1,14 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import ProductDetails from '../../components/Products/ProductDetails';
 import { GetStaticPaths } from 'next';
+import Head from 'next/head';
+import type { NextPage } from 'next';
+import ProductDetails from '../../components/Products/ProductDetails';
 
 const ProductDetailsPage: NextPage<{ id: string }> = (props) => {
 	return (
 		<>
 			<Head>
-				<title>Create Next App</title>
-				<meta name='description' content='Product Details' />
+				<title>Product Details</title>
+				<meta name='description' content='Details of a Product' />
 			</Head>
 			<ProductDetails id={props.id} />
 		</>

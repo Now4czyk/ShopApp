@@ -1,10 +1,10 @@
-import classes from './CartList.module.css';
+import classes from './_CartList.module.scss';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { cartInfo } from '../../store/store';
 import CartItem from './CartItem';
-import { useRouter } from 'next/router';
 import CartForm from './CartForm';
-import { useState } from 'react';
 
 const CartList = () => {
 	const router = useRouter();

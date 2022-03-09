@@ -1,12 +1,15 @@
-import classes from './MainHeader.module.css';
+import classes from './_MainHeader.module.scss';
 import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout, setAdmin } from '../../store/Slices/authSlice';
-import { changeTryToAddSthValue } from '../../store/Slices/authSlice';
-import { clearCart } from '../../store/Slices/cartSlice';
-import { authInfo, cartInfo, favoritesInfo } from '../../store/store';
-import { clearFavorites } from '../../store/Slices/favoriteSlice';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { authInfo, cartInfo, favoritesInfo } from '../../store/store';
+import {
+	changeTryToAddSthValue,
+	logout,
+	setAdmin,
+} from '../../store/Slices/authSlice';
+import { clearCart } from '../../store/Slices/cartSlice';
+import { clearFavorites } from '../../store/Slices/favoriteSlice';
 
 const MainHeader = () => {
 	const authData = useSelector(authInfo);
@@ -85,6 +88,8 @@ const MainHeader = () => {
 			</li>
 		);
 	};
+
+	console.log(window.innerWidth);
 
 	return (
 		<header className={classes.header}>

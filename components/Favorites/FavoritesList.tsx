@@ -1,7 +1,7 @@
-import FavoritesItem from './FavoritesItem';
-import classes from './FavoritesList.module.css';
-import { favoritesInfo } from '../../store/store';
+import classes from './_FavoritesList.module.scss';
 import { useSelector } from 'react-redux';
+import { favoritesInfo } from '../../store/store';
+import FavoritesItem from './FavoritesItem';
 
 const FavoritesList = () => {
 	const favoritesData = useSelector(favoritesInfo);

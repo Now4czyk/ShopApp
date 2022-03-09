@@ -1,0 +1,92 @@
+@import '../../scss/variables';
+@import '../../scss/breakpoints';
+
+.list {
+	width: 80%;
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 1rem;
+	border-radius: 1rem;
+	box-shadow: 0 0 3px 0px black;
+	background-color: white;
+	@include mobile {
+		width: 100%;
+	}
+	.noProducts {
+		margin: auto 0;
+		text-align: center;
+		font-size: 2rem;
+		line-height: 5rem;
+		@include mobile {
+			font-size: 3rem;
+		}
+	}
+	.summary {
+		display: flex;
+		justify-content: space-between;
+		width: 80%;
+		margin: 0 auto;
+		padding: 1rem;
+		line-height: 2rem;
+		@include mobile {
+			width: 100%;
+		}
+		.title {
+			font-weight: bold;
+			font-size: 1.7rem;
+			@include mobile {
+				font-size: 4rem;
+			}
+		}
+		.amount {
+			font-size: 1.3rem;
+			@include mobile {
+				font-size: 3rem;
+			}
+		}
+	}
+	.maxQuantity {
+		width: 80%;
+		margin: 0 auto;
+		padding-left: 1rem;
+		color: red;
+		font-weight: bold;
+	}
+	.actions {
+		display: flex;
+		justify-content: flex-end;
+		width: 80%;
+		margin: 0 auto;
+		padding: 1rem;
+		@include mobile {
+			width: 100%;
+		}
+		button {
+			height: 2rem;
+			margin-left: 0.5rem;
+			padding: 0.3rem 1rem;
+			border: none;
+			border-radius: 1rem;
+			background-color: $button-color;
+			line-height: 0.8rem;
+			font-size: 1rem;
+			@include mobile{
+				height: 4rem;
+				padding: 0 2.5rem;
+				border-radius: 2.5rem;
+				font-size: 2.5rem;
+			}
+			&:hover {
+				background-color: $button-clicked-color;
+				cursor: pointer;
+			}
+		}
+		.isEmpty {
+			background-color: rgb(231, 231, 231);
+			&:hover {
+				background-color: rgb(231, 231, 231);
+				cursor: auto;
+			}
+		}
+	}
+}

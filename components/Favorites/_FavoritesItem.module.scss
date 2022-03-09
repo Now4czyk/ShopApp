@@ -1,0 +1,59 @@
+@import '../../scss/breakpoints';
+
+.item {
+	display: flex;
+	width: 80%;
+	margin: 0 auto;
+	padding: 1rem;
+	border-bottom: 1px solid rgb(151, 151, 151);
+	@include mobile {
+		width: 100%;
+	}
+	img.productImg {
+		height: 7rem;
+		border-radius: 0.5rem;
+		box-shadow: 0 0 2px 0px black;
+		cursor: pointer;
+		@include mobile {
+			height: 20rem;
+		}
+	}
+	.data {
+		width: 80%;
+		margin-left: 1rem;
+		.title {
+			font-size: 1.3rem;
+			font-weight: bold;
+			cursor: pointer;
+			@include mobile {
+				font-size: 3.2rem;
+			}
+		}
+		.id {
+			font-size: 1rem;
+			@include mobile {
+				font-size: 1.8rem;
+			}
+		}
+		.price {
+			margin-top: 0.5rem;
+			@include mobile {
+				font-size: 2rem;
+			}
+		}
+	}
+	.actions {
+		display: flex;
+		align-items: center;
+		img.favorite {
+			height: 3rem;
+			width: 3rem;
+			cursor: pointer;
+			@include mobile {
+				height: 4rem;
+				width: 4rem;
+				margin-right: 2rem;
+			}
+		}
+	}
+}

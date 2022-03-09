@@ -1,0 +1,24 @@
+@import '../../scss/breakpoints';
+
+.card {
+	padding: 3rem;
+	border-radius: 4rem;
+	max-width: 2000px;
+	min-width: 1000px;
+	margin: auto;
+	background-color: rgb(245, 245, 245);
+}
+
+.adminBelt {
+	min-width: 100vw;
+	background-color: rgb(4, 113, 255);
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.3rem;
+	@include tablet {
+		font-size: 2rem;
+	}
+	@include mobile{
+		font-size: 3rem;
+	}
+}

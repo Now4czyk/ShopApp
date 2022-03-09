@@ -1,19 +1,19 @@
+import classes from './_ProductDetails.module.scss';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	availableProductsInfo,
 	authInfo,
+	cartInfo,
 	favoritesInfo,
 } from '../../store/store';
-import { useDispatch, useSelector } from 'react-redux';
-import classes from './ProductDetails.module.css';
-import { useState } from 'react';
-import { addToCart, setCartLoggedOut } from '../../store/Slices/cartSlice';
 import { changeTryToAddSthValue } from '../../store/Slices/authSlice';
-import { useRouter } from 'next/router';
+import { addToCart, setCartLoggedOut } from '../../store/Slices/cartSlice';
 import {
 	addToFavorites,
 	removeFromFavorites,
 } from '../../store/Slices/favoriteSlice';
-import { cartInfo } from '../../store/store';
 
 const ProductDetails: React.FC<{ id: string }> = (props) => {
 	const [quantityInput, setQuantityInput] = useState(1);
@@ -46,7 +46,12 @@ const ProductDetails: React.FC<{ id: string }> = (props) => {
 
 	const addToFavoritesHandler = () => {
 		if (!authData.isAdmin) {
-			dispatch(addToFavorites(product));
+			if (authData.isLoggedIn) {
+				dispatch(addToFavorites(product));
+			} else {
+				router.push('./auth');
+				dispatch(changeTryToAddSthValue(true));
+			}
 		}
 	};
 

@@ -1,0 +1,117 @@
+@import '../../scss/variables';
+@import '../../scss/breakpoints';
+
+.container {
+	display: flex;
+	justify-content: center;
+	width: 80%;
+	margin: 2rem auto;
+	@include tablet {
+		flex-direction: column;
+	}
+	.img {
+		height: 30rem;
+		border-radius: 1rem;
+		box-shadow: 0 0 3px 0px black;
+		@include tablet {
+			height: 65rem;
+		}
+		@include mobile {
+			box-shadow: 0 0 8px 0px black;
+			border-radius: 2rem;
+		}
+	}
+	.data {
+		display: flex;
+		flex-direction: column;
+		padding-left: 3rem;
+		padding-top: 1rem;
+		line-height: 3rem;
+		@include tablet {
+			padding: 1rem 0;
+		}
+		.title {
+			font-size: 3rem;
+			font-weight: bold;
+			@include mobile{
+				margin-top: 1rem;
+				font-size: 5.5rem;
+			}
+		}
+		.price {
+			font-size: 1.6rem;
+			@include mobile{
+				margin-top: 1.5rem;
+				font-size: 3rem;
+			}
+		}
+		.id {
+			font-size: 1.1rem;
+			@include mobile{
+				margin-top: 1rem;
+				margin-bottom: 1rem;
+				font-size: 3rem;
+			}
+		}
+		form {
+			display: flex;
+			flex-direction: column;
+			font-size: 1.2rem;
+			@include mobile{
+				margin-top: 1rem;
+				font-size: 3rem;
+			}
+			input,
+			select {
+				height: 2rem;
+				border: 1px gray solid;
+				border-radius: 0.5rem;
+				text-align: center;
+				font-size: 1rem;
+				@include mobile{
+					height: 5rem;
+					margin-top: 1rem;
+					margin-bottom: 2rem;
+					font-size: 3rem;
+				}
+			}
+			.actions {
+				display: flex;
+				margin-top: 2rem;
+				align-items: center;
+				img.favorite {
+					height: 3rem;
+					width: 3rem;
+					margin-left: 0.2rem;
+					cursor: pointer;
+					@include mobile{
+						height: 6rem;
+						width: 6rem;
+					}
+				}
+				.addButton {
+					height: 3rem;
+					width: 90%;
+					border: none;
+					border-radius: 2rem;
+					background-color: $button-color;
+					cursor: pointer;
+					font-size: 1.5rem;
+					line-height: 2rem;
+					&:hover {
+						background-color: $button-clicked-color;
+					}
+					@include mobile{
+						height: 6rem;
+						border-radius: 3rem;
+						font-size: 4rem;
+					}
+				}
+			}
+			.maxQuantity {
+				font-weight: bold;
+				color: red;
+			}
+		}
+	}
+}
