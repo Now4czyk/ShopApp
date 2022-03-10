@@ -17,7 +17,7 @@ const MainHeader = () => {
 	const [isFavoritesActive, setIsFavoritesActive] = useState(false);
 	const [isLoginActive, setIsLoginActive] = useState(false);
 	const [isModifyActive, setIsModifyActive] = useState(false);
-	const [isUserPerspectiveActive, setIsUserPerspectiveActive] = useState(false);
+	const [isUserPerspectiveActive, setIsUserPerspectiveActive] = useState(true);
 	const [counterIsHighlighted, setCounterIsHighlighted] = useState(false);
 	const [favoritesIsHighlighted, setFavoritesIsHighlighted] = useState(false);
 	const dispatch = useDispatch();

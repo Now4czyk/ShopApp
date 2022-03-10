@@ -20,8 +20,10 @@
 		border-radius: 2rem;
 		background-color: $button-color;
 		cursor: pointer;
-		font-size: 1.5rem;
 		line-height: 2rem;
+		color: black;
+		font-size: 1.5rem;
+		font-weight: normal;
 		transition: background-color 0.15s linear;
 		@include mobile {
 			height: 4.5rem;
@@ -52,7 +54,9 @@
 		border-radius: 1rem;
 		background-color: $button-color;
 		line-height: 0.8rem;
+		color: black;
 		font-size: 1rem;
+		font-weight: normal;
 		transition: background-color 0.15s linear;
 		@include mobile {
 			height: 4rem;
