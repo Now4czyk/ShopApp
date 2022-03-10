@@ -14,6 +14,8 @@ import {
 	addToFavorites,
 	removeFromFavorites,
 } from '../../store/Slices/favoriteSlice';
+import { setNavsStates } from '../../store/Slices/underlinedNavSlice';
+
 
 const ProductDetails: React.FC<{ id: string }> = (props) => {
 	const [quantityInput, setQuantityInput] = useState(1);
@@ -25,6 +27,9 @@ const ProductDetails: React.FC<{ id: string }> = (props) => {
 	const cartData = useSelector(cartInfo);
 	const favoritesData = useSelector(favoritesInfo);
 	const router = useRouter();
+
+	//setting underlined navs to default
+	dispatch(setNavsStates(false));
 
 	//handling data from Slices
 	const choosenProduct = availableProductsData.find((product) => {

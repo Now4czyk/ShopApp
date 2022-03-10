@@ -2,6 +2,8 @@ import classes from './_ModificationChangeListItem.module.scss';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setNav, setNavsStates } from '../../store/Slices/underlinedNavSlice';
 
 const ModificationChangeListItem: React.FC<{
 	product: {
@@ -19,6 +21,7 @@ const ModificationChangeListItem: React.FC<{
 	const [isValidUrl, setIsValidUrl] = useState(true);
 	const [isEditing, setIsEditing] = useState(false);
 	const [isSubmitted, setIsSubmitted] = useState(false);
+	const dispatch = useDispatch();
 	const router = useRouter();
 
 	//handling visibility of a section with a form
@@ -76,6 +79,8 @@ const ModificationChangeListItem: React.FC<{
 		axios
 			.delete('/api/change-product', { data: { id: props.product.id } })
 			.then(() => {
+				dispatch(setNavsStates(false));
+				dispatch(setNav({ navName: 'userPerspective', isActive: true }));
 				router.push('./');
 			})
 			.catch((error) => {
@@ -101,6 +106,8 @@ const ModificationChangeListItem: React.FC<{
 					change: data,
 				})
 				.then(() => {
+					dispatch(setNavsStates(false));
+					dispatch(setNav({ navName: 'userPerspective', isActive: true }));
 					router.push('./');
 				})
 				.catch((error) => {

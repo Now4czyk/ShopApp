@@ -15,6 +15,7 @@ import {
 	setCart,
 	setCartLoggedOut,
 } from '../../store/Slices/cartSlice';
+import { setNav, setNavsStates } from '../../store/Slices/underlinedNavSlice';
 
 type cartData = {
 	url: string;
@@ -118,6 +119,8 @@ const AuthForm: React.FC<{
 					if (data.localId === 'GZZ23nXcQTVdWBunP2zYX1zhoXF3') {
 						dispatch(setAdmin(true));
 					}
+					dispatch(setNavsStates(false));
+					dispatch(setNav({ navName: 'userPerspective', isActive: true }));
 					router.push('/');
 				})
 				//handling error

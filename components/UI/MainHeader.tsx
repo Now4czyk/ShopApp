@@ -3,28 +3,41 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { authInfo, cartInfo, favoritesInfo } from '../../store/store';
 import {
-	changeTryToAddSthValue,
-	logout,
-	setAdmin,
-} from '../../store/Slices/authSlice';
+	authInfo,
+	cartInfo,
+	favoritesInfo,
+	underlinedNavInfo,
+} from '../../store/store';
+import { logout, setAdmin } from '../../store/Slices/authSlice';
 import { clearCart } from '../../store/Slices/cartSlice';
 import { clearFavorites } from '../../store/Slices/favoriteSlice';
+import { setNav, setNavsStates } from '../../store/Slices/underlinedNavSlice';
 
 const MainHeader = () => {
-	const [isCartActive, setIsCartActive] = useState(false);
-	const [isFavoritesActive, setIsFavoritesActive] = useState(false);
-	const [isLoginActive, setIsLoginActive] = useState(false);
-	const [isModifyActive, setIsModifyActive] = useState(false);
-	const [isUserPerspectiveActive, setIsUserPerspectiveActive] = useState(true);
 	const [counterIsHighlighted, setCounterIsHighlighted] = useState(false);
 	const [favoritesIsHighlighted, setFavoritesIsHighlighted] = useState(false);
 	const dispatch = useDispatch();
 	const authData = useSelector(authInfo);
 	const cartData = useSelector(cartInfo);
 	const favoritesData = useSelector(favoritesInfo);
+	const underlinedNavData = useSelector(underlinedNavInfo);
 	const router = useRouter();
+	const cartActive = underlinedNavData.find(
+		(nav) => nav.navName === 'cart'
+	)!.isActive;
+	const favoritesActive = underlinedNavData.find(
+		(nav) => nav.navName === 'favorites'
+	)!.isActive;
+	const loginActive = underlinedNavData.find(
+		(nav) => nav.navName === 'login'
+	)!.isActive;
+	const modifyActive = underlinedNavData.find(
+		(nav) => nav.navName === 'modify'
+	)!.isActive;
+	const userPerspectiveActive = underlinedNavData.find(
+		(nav) => nav.navName === 'userPerspective'
+	)!.isActive;
 
 	//handling data from Slices
 	const cartCounter = cartData.reduce((curNumber, item) => {
@@ -66,48 +79,37 @@ const MainHeader = () => {
 
 	//handling underline animations
 	const userPerspectiveHandler = () => {
-		setIsModifyActive(false);
-		setIsUserPerspectiveActive(true);
+		dispatch(setNavsStates(false));
+		dispatch(setNav({ navName: 'userPerspective', isActive: true }));
 		router.push('./');
 	};
 	const modifyHandler = () => {
-		setIsModifyActive(true);
-		setIsUserPerspectiveActive(false);
+		dispatch(setNavsStates(false));
+		dispatch(setNav({ navName: 'modify', isActive: true }));
 		router.push('./modification');
 	};
 	const cartHandler = () => {
-		setIsCartActive(true);
-		setIsLoginActive(false);
-		setIsFavoritesActive(false);
+		dispatch(setNavsStates(false));
+		dispatch(setNav({ navName: 'cart', isActive: true }));
 		router.push('/cart');
 	};
 	const favoritesHandler = () => {
-		setIsCartActive(false);
-		setIsLoginActive(false);
-		setIsFavoritesActive(true);
+		dispatch(setNavsStates(false));
+		dispatch(setNav({ navName: 'favorites', isActive: true }));
 		router.push('./favorites');
 	};
 	const titleHandler = () => {
-		setIsCartActive(false);
-		setIsLoginActive(false);
-		setIsFavoritesActive(false);
-		setIsModifyActive(false);
-		setIsUserPerspectiveActive(false);
+		dispatch(setNavsStates(false));
+		dispatch(setNav({ navName: 'userPerspective', isActive: true }));
 		router.push('/');
 	};
 	const loginHandler = () => {
-		setIsCartActive(false);
-		setIsLoginActive(true);
-		setIsFavoritesActive(false);
-		setIsModifyActive(false);
-		setIsUserPerspectiveActive(false);
-		dispatch(changeTryToAddSthValue(false));
+		dispatch(setNavsStates(false));
+		dispatch(setNav({ navName: 'login', isActive: true }));
 		router.push('/auth');
 	};
 	const logoutHandler = () => {
-		setIsCartActive(false);
-		setIsLoginActive(false);
-		setIsFavoritesActive(false);
+		dispatch(setNavsStates(false));
 		dispatch(logout());
 		dispatch(setAdmin(false));
 		router.push('/');
@@ -143,7 +145,7 @@ const MainHeader = () => {
 			<li
 				onClick={cartHandler}
 				className={
-					isCartActive
+					cartActive
 						? `${classes.liCart} ${classes.active}`
 						: `${classes.liCart} ${classes.animation}`
 				}>
@@ -164,7 +166,7 @@ const MainHeader = () => {
 			<li
 				onClick={favoritesHandler}
 				className={
-					isFavoritesActive
+					favoritesActive
 						? `${classes.liCart} ${classes.active}`
 						: `${classes.liCart} ${classes.animation}`
 				}>
@@ -195,7 +197,7 @@ const MainHeader = () => {
 									<li
 										onClick={userPerspectiveHandler}
 										className={
-											isUserPerspectiveActive
+											userPerspectiveActive
 												? `${classes.userPerspective} ${classes.active}`
 												: `${classes.userPerspective} ${classes.animation}`
 										}>
@@ -203,7 +205,7 @@ const MainHeader = () => {
 									</li>
 									<li
 										className={
-											isModifyActive ? classes.active : classes.animation
+											modifyActive ? classes.active : classes.animation
 										}
 										onClick={modifyHandler}>
 										Modify
@@ -224,7 +226,7 @@ const MainHeader = () => {
 						<>
 							<LiCart />
 							<li
-								className={isLoginActive ? classes.active : classes.animation}
+								className={loginActive ? classes.active : classes.animation}
 								onClick={loginHandler}>
 								Login
 							</li>

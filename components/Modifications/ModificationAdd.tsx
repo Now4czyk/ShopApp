@@ -2,6 +2,8 @@ import classes from './_ModificationAdd.module.scss';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setNav, setNavsStates } from '../../store/Slices/underlinedNavSlice';
 
 const ModificationAdd: React.FC = () => {
 	const [isSubmitted, setIsSubmitted] = useState(false);
@@ -12,6 +14,7 @@ const ModificationAdd: React.FC = () => {
 	const [isValidTitle, setIsValidTitle] = useState(false);
 	const [isValidPrice, setIsValidPrice] = useState(false);
 	const [isValidUrl, setIsValidUrl] = useState(false);
+	const dispatch = useDispatch();
 	const router = useRouter();
 
 	//handling visibility of a section with a form
@@ -62,6 +65,8 @@ const ModificationAdd: React.FC = () => {
 					price: enteredPrice,
 				})
 				.then(() => {
+					dispatch(setNavsStates(false));
+					dispatch(setNav({ navName: 'userPerspective', isActive: true }));
 					setIsSectionVisible(!isSectionVisible);
 					router.push('./');
 				})
