@@ -20,18 +20,19 @@ const MainHeader = () => {
 	const [isUserPerspectiveActive, setIsUserPerspectiveActive] = useState(false);
 	const [counterIsHighlighted, setCounterIsHighlighted] = useState(false);
 	const [favoritesIsHighlighted, setFavoritesIsHighlighted] = useState(false);
+	const dispatch = useDispatch();
 	const authData = useSelector(authInfo);
 	const cartData = useSelector(cartInfo);
 	const favoritesData = useSelector(favoritesInfo);
 	const router = useRouter();
-	const dispatch = useDispatch();
 
+	//handling data from Slices
 	const cartCounter = cartData.reduce((curNumber, item) => {
 		return curNumber + item.quantity;
 	}, 0);
-
 	const favoriteCounter = favoritesData.length;
 
+	//handling counter animations
 	useEffect(() => {
 		console.log(cartCounter);
 		if (cartCounter === 0) {
@@ -47,7 +48,6 @@ const MainHeader = () => {
 			clearTimeout(timerCounter);
 		};
 	}, [cartCounter]);
-
 	useEffect(() => {
 		console.log(favoriteCounter);
 		if (favoriteCounter === 0) {
@@ -64,6 +64,29 @@ const MainHeader = () => {
 		};
 	}, [favoriteCounter]);
 
+	//handling underline animations
+	const userPerspectiveHandler = () => {
+		setIsModifyActive(false);
+		setIsUserPerspectiveActive(true);
+		router.push('./');
+	};
+	const modifyHandler = () => {
+		setIsModifyActive(true);
+		setIsUserPerspectiveActive(false);
+		router.push('./modification');
+	};
+	const cartHandler = () => {
+		setIsCartActive(true);
+		setIsLoginActive(false);
+		setIsFavoritesActive(false);
+		router.push('/cart');
+	};
+	const favoritesHandler = () => {
+		setIsCartActive(false);
+		setIsLoginActive(false);
+		setIsFavoritesActive(true);
+		router.push('./favorites');
+	};
 	const titleHandler = () => {
 		setIsCartActive(false);
 		setIsLoginActive(false);
@@ -113,29 +136,8 @@ const MainHeader = () => {
 				alert(error.response.statusText);
 			});
 	};
-	const cartHandler = () => {
-		setIsCartActive(true);
-		setIsLoginActive(false);
-		setIsFavoritesActive(false);
-		router.push('/cart');
-	};
-	const favoritesHandler = () => {
-		setIsCartActive(false);
-		setIsLoginActive(false);
-		setIsFavoritesActive(true);
-		router.push('./favorites');
-	};
-	const userPerspectiveHandler = () => {
-		setIsModifyActive(false);
-		setIsUserPerspectiveActive(true);
-		router.push('./');
-	};
-	const modifyHandler = () => {
-		setIsModifyActive(true);
-		setIsUserPerspectiveActive(false);
-		router.push('./modification');
-	};
 
+	//handling li items with counters
 	const LiCart = () => {
 		return (
 			<li
@@ -157,7 +159,6 @@ const MainHeader = () => {
 			</li>
 		);
 	};
-
 	const LiFavorites = () => {
 		return (
 			<li

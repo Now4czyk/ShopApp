@@ -8,6 +8,7 @@ const ModificationChange = () => {
 	const [isSectionVisible, setIsSectionVisible] = useState(false);
 	const availableProductsData = useSelector(availableProductsInfo);
 
+	//handling visibility of a section with available items
 	const sectionVisibilityHandler = () => {
 		setIsSectionVisible(!isSectionVisible);
 	};

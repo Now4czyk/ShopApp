@@ -14,11 +14,13 @@ const ModificationAdd: React.FC = () => {
 	const [isValidUrl, setIsValidUrl] = useState(false);
 	const router = useRouter();
 
+	//handling visibility of a section with a form
 	const sectionVisibilityHandler = () => {
 		setIsSectionVisible(!isSectionVisible);
 		setIsSubmitted(false);
 	};
 
+	//handling inputs
 	const titleHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setEnteredTitle(event.target.value);
 		const re = /^[0-9A-Za-z\s\-]+$/;
@@ -28,7 +30,6 @@ const ModificationAdd: React.FC = () => {
 			setIsValidTitle(false);
 		}
 	};
-
 	const urlHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setEnteredUrl(event.target.value);
 		const re =
@@ -39,7 +40,6 @@ const ModificationAdd: React.FC = () => {
 			setIsValidUrl(false);
 		}
 	};
-
 	const priceHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setEnteredPrice(event.target.value);
 		const re = /^[+-]?\d+(\.\d+)?$/;
@@ -50,6 +50,7 @@ const ModificationAdd: React.FC = () => {
 		}
 	};
 
+	//handling form submission
 	const formSubmission = (event: React.FormEvent) => {
 		event.preventDefault();
 		setIsSubmitted(true);

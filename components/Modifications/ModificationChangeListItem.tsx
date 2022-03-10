@@ -21,10 +21,12 @@ const ModificationChangeListItem: React.FC<{
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const router = useRouter();
 
+	//handling visibility of a section with a form
 	const sectionVisibilityHandler = () => {
 		setIsEditing(!isEditing);
 	};
 
+	//handling inputs
 	const titleHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.value) {
 			setEnteredTitle(event.target.value);
@@ -37,7 +39,6 @@ const ModificationChangeListItem: React.FC<{
 				event.target.value.length === 0
 		);
 	};
-
 	const urlHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.value) {
 			setEnteredUrl(event.target.value);
@@ -50,7 +51,6 @@ const ModificationChangeListItem: React.FC<{
 			re.test(event.target.value) || event.target.value.length === 0
 		);
 	};
-
 	const priceHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.value) {
 			setEnteredPrice(parseFloat(parseFloat(event.target.value).toFixed(2)));
@@ -65,10 +65,12 @@ const ModificationChangeListItem: React.FC<{
 		);
 	};
 
+	//handling redirection
 	const redirectHandler = () => {
 		router.push(`./${props.product.id}`);
 	};
 
+	//handling deletion of an element
 	const deleteHandler = () => {
 		console.log(props.product.id);
 		axios
@@ -81,6 +83,7 @@ const ModificationChangeListItem: React.FC<{
 			});
 	};
 
+	//handliing form submission
 	const formSubmission = (event: React.FormEvent) => {
 		event.preventDefault();
 		setIsSubmitted(true);

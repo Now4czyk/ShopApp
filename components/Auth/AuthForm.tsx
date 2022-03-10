@@ -44,38 +44,37 @@ const AuthForm: React.FC<{
 	const [enteredEmail, setEnteredEmail] = useState('');
 	const [enteredPassword, setEnteredPassword] = useState('');
 	const [isLogin, setIsLogin] = useState(true);
+	const emailInput = useRef<HTMLInputElement>(null);
+	const passwordInput = useRef<HTMLInputElement>(null);
 	const dispatch = useDispatch();
 	const authData = useSelector(authInfo);
 	const cartLoggedOutData = useSelector(cartLoggedOutInfo);
 	const router = useRouter();
 
-	const emailInput = useRef<HTMLInputElement>(null);
-	const passwordInput = useRef<HTMLInputElement>(null);
+	//switch a state of being logged in
+	const switchHandler = () => {
+		setIsLogin(!isLogin);
+	};
 
+	//handling inputs
 	const onChangeEmail = () => {
 		setEnteredEmail(emailInput.current!.value);
 		setIsTouchedEmail(true);
 	};
-
 	const onChangePassword = () => {
 		setEnteredPassword(passwordInput.current!.value);
 		setIsTouchedPassword(true);
 	};
 
-	const switchHandler = () => {
-		setIsLogin(!isLogin);
-	};
-
+	//handling form submission
 	const submissionHandler = (event: React.FormEvent) => {
 		event.preventDefault();
 		setIsEmailValid(enteredEmail.includes('@'));
 		setIsPasswordValid(enteredPassword.trim().length > 6);
-
 		if (
 			enteredEmail.includes('@') === true &&
 			enteredPassword.trim().length > 6
 		) {
-			//login
 			let url = '';
 			if (isLogin) {
 				url =
@@ -91,6 +90,7 @@ const AuthForm: React.FC<{
 					password: enteredPassword,
 					returnSecureToken: true,
 				})
+				//handling success
 				.then((response) => {
 					const data = response.data;
 					dispatch(login(data.localId));
@@ -120,6 +120,7 @@ const AuthForm: React.FC<{
 					}
 					router.push('/');
 				})
+				//handling error
 				.catch((error) => {
 					alert(error.response.data.error.message);
 				});

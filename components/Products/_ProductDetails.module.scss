@@ -6,6 +6,7 @@
 	justify-content: center;
 	width: 80%;
 	margin: 2rem auto;
+	animation: appearSmoothly 0.5s ease-in-out forwards;
 	@include tablet {
 		flex-direction: column;
 	}
@@ -121,5 +122,16 @@
 				color: red;
 			}
 		}
+	}
+}
+
+@keyframes appearSmoothly {
+	0% {
+		opacity: 0;
+		transform: translateY(20%);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
 	}
 }

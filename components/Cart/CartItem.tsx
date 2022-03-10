@@ -15,12 +15,16 @@ const CartItem: React.FC<{
 	setMaxQuantity: Dispatch<SetStateAction<boolean>>;
 }> = (props) => {
 	const dispatch = useDispatch();
-	const router = useRouter();
 	const authData = useSelector(authInfo);
 	const cartData = useSelector(cartInfo);
+	const router = useRouter();
+
+	//handling data from a Cart
 	const quantity = cartData.reduce((sum, product) => {
 		return sum + product.quantity;
 	}, 0);
+
+	//handling buttons
 	const addProductHandler = () => {
 		if (!authData.isAdmin) {
 			const { url, title, price, id, key, size } = props.product;
@@ -33,9 +37,6 @@ const CartItem: React.FC<{
 			}
 		}
 	};
-	const redirectHandler = () => {
-		router.push(`./${props.product.id}`);
-	};
 	const removeProductHandler = () => {
 		dispatch(removeOneFromCart(props.product));
 		props.setMaxQuantity(false);
@@ -44,6 +45,11 @@ const CartItem: React.FC<{
 		dispatch(removePositionFromCart(props.product));
 	};
 
+	//handling redirection
+	const redirectHandler = () => {
+		router.push(`./${props.product.id}`);
+	};
+	
 	return (
 		<>
 			<div className={classes.item}>

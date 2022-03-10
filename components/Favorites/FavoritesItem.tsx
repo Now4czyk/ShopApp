@@ -16,11 +16,8 @@ type data = {
 
 const FavoritesItem: React.FC<{ product: data }> = (props) => {
 	const dispatch = useDispatch();
-	const router = useRouter();
 	const favoritesData = useSelector(favoritesInfo);
-	const isFavorite = favoritesData.find(
-		(product) => product.id === props.product.id
-	);
+	const router = useRouter();
 	const product = {
 		url: props.product.url,
 		title: props.product.title,
@@ -28,14 +25,20 @@ const FavoritesItem: React.FC<{ product: data }> = (props) => {
 		id: props.product.id,
 	};
 
+	//handling data from Favorites Slice
+	const isFavorite = favoritesData.find(
+		(product) => product.id === props.product.id
+	);
+
+	//handling buttons
 	const addToFavoritesHandler = () => {
 		dispatch(addToFavorites(product));
 	};
-
 	const removeFromFavoritesHandler = () => {
 		dispatch(removeFromFavorites(product));
 	};
 
+	//handling redirection
 	const redirectHandler = () => {
 		router.push(`./${props.product.id}`);
 	};

@@ -7,23 +7,23 @@ import CartItem from './CartItem';
 import CartForm from './CartForm';
 
 const CartList = () => {
-	const router = useRouter();
 	const [isOrderClicked, setIsOrderClicked] = useState(false);
 	const [maxQuantity, setMaxQuantity] = useState(false);
 	const cartData = useSelector(cartInfo);
+	const router = useRouter();
 
+	//handling data from a Cart
 	const quantity = cartData.reduce((curNum, product) => {
 		return curNum + product.quantity;
 	}, 0);
-
 	const price = cartData.reduce((curNumber, product) => {
 		return curNumber + product.price * product.quantity;
 	}, 0);
 
+	//handling buttons
 	const continueShoppingHandler = () => {
 		router.push('/');
 	};
-
 	const orderHandler = () => {
 		if (quantity !== 0) {
 			setIsOrderClicked(!isOrderClicked);

@@ -16,10 +16,11 @@ const CartForm: React.FC<{ onClickCancel: () => void }> = (props) => {
 	const [isValidPostalCode, setIsValidPostalCode] = useState(false);
 	const [isValidCity, setIsValidCity] = useState(false);
 	const [isSubmittedForm, setIsSubmittedForm] = useState(false);
+	const dispatch = useDispatch();
 	const cartData = useSelector(cartInfo);
 	const router = useRouter();
-	const dispatch = useDispatch();
 
+	//handling inputs
 	const nameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setEnteredName(event.target.value);
 		setIsValidName(
@@ -44,6 +45,7 @@ const CartForm: React.FC<{ onClickCancel: () => void }> = (props) => {
 		);
 	};
 
+	//handling form submission
 	const submissionHandler = (event: React.FormEvent) => {
 		event.preventDefault();
 		setIsSubmittedForm(true);
@@ -80,6 +82,7 @@ const CartForm: React.FC<{ onClickCancel: () => void }> = (props) => {
 				});
 		}
 	};
+	
 	return (
 		<form className={classes.form}>
 			<div className={classes.inputField}>

@@ -14,11 +14,10 @@ const Product: React.FC<{
 	price: number;
 	id: string;
 }> = (props) => {
-	const router = useRouter();
 	const dispatch = useDispatch();
 	const authData = useSelector(authInfo);
 	const favoritesData = useSelector(favoritesInfo);
-	const isFavorite = favoritesData.find((product) => product.id === props.id);
+	const router = useRouter();
 	const product = {
 		url: props.url,
 		title: props.title,
@@ -26,6 +25,10 @@ const Product: React.FC<{
 		id: props.id,
 	};
 
+	//handling data from a Favorite Slide
+	const isFavorite = favoritesData.find((product) => product.id === props.id);
+
+	//handling buttons
 	const addToFavoritesHandler = () => {
 		if (!authData.isAdmin) {
 			if (authData.isLoggedIn) {
@@ -36,7 +39,6 @@ const Product: React.FC<{
 			}
 		}
 	};
-
 	const removeFromFavoritesHandler = () => {
 		if (!authData.isAdmin) {
 			if (authData.isLoggedIn) {
@@ -48,10 +50,12 @@ const Product: React.FC<{
 		}
 	};
 
-	const goToDetailsHandler = () => {
+	//handling redirection
+	const redirectionHandler = () => {
 		console.log(`In component Product`);
 		router.push(`/${props.id}`);
 	};
+	
 	return (
 		<div className={classes.product}>
 			<p className={classes.title}>
@@ -71,7 +75,7 @@ const Product: React.FC<{
 			</p>
 			<img
 				className={classes.productImg}
-				onClick={goToDetailsHandler}
+				onClick={redirectionHandler}
 				src={props.url}
 			/>
 			<p className={classes.price}>{`$${props.price}`}</p>

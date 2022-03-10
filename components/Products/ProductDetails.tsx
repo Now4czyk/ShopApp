@@ -19,23 +19,21 @@ const ProductDetails: React.FC<{ id: string }> = (props) => {
 	const [quantityInput, setQuantityInput] = useState(1);
 	const [sizeInput, setSizeInput] = useState('S');
 	const [maxQuantity, setMaxQuantity] = useState(false);
+	const dispatch = useDispatch();
 	const availableProductsData = useSelector(availableProductsInfo);
-	const favoritesData = useSelector(favoritesInfo);
 	const authData = useSelector(authInfo);
 	const cartData = useSelector(cartInfo);
-	const dispatch = useDispatch();
+	const favoritesData = useSelector(favoritesInfo);
 	const router = useRouter();
 
-	const quantity = cartData.reduce((sum, product) => {
-		return sum + product.quantity;
-	}, 0);
-
+	//handling data from Slices
 	const choosenProduct = availableProductsData.find((product) => {
 		return product.id === props.id;
 	});
-	//fix the problem (the underlined values are never equal to undefined)
+	const quantity = cartData.reduce((sum, product) => {
+		return sum + product.quantity;
+	}, 0);
 	const { url, title, price, id } = choosenProduct;
-
 	const isFavorite = favoritesData.find((product) => product.id === props.id);
 	const product = {
 		url,
@@ -44,6 +42,7 @@ const ProductDetails: React.FC<{ id: string }> = (props) => {
 		id,
 	};
 
+	//handling buttons
 	const addToFavoritesHandler = () => {
 		if (!authData.isAdmin) {
 			if (authData.isLoggedIn) {
@@ -54,21 +53,21 @@ const ProductDetails: React.FC<{ id: string }> = (props) => {
 			}
 		}
 	};
-
 	const removeFromFavoritesHandler = () => {
 		if (!authData.isAdmin) {
 			dispatch(removeFromFavorites(product));
 		}
 	};
 
+	//handling inputs
 	const sizeHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		setSizeInput(event.target.value);
 	};
-
 	const quantityHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setQuantityInput(parseInt(event.target.value));
 	};
 
+	//handling form submission
 	const submissionHandler = (event: React.FormEvent) => {
 		event.preventDefault();
 		if (!authData.isAdmin) {
