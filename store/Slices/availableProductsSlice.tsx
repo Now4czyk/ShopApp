@@ -7,6 +7,7 @@ type data = {
 	price: number;
 	key: string;
 	id: string;
+	blockade: boolean;
 };
 
 interface initialValues {

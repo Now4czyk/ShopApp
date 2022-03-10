@@ -47,7 +47,6 @@ const MainHeader = () => {
 
 	//handling counter animations
 	useEffect(() => {
-		console.log(cartCounter);
 		if (cartCounter === 0) {
 			return;
 		}

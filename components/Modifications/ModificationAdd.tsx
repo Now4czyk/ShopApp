@@ -63,6 +63,7 @@ const ModificationAdd: React.FC = () => {
 					title: enteredTitle,
 					url: enteredUrl,
 					price: enteredPrice,
+					blockade: false,
 				})
 				.then(() => {
 					dispatch(setNavsStates(false));

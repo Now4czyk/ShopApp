@@ -11,9 +11,11 @@ type productsFromDB = {
 	price: number;
 	url: string;
 	id: string;
+	blockade: boolean;
 };
 
 const Home: NextPage<{ products: productsFromDB[] }> = (props) => {
+
 	const dispatch = useDispatch();
 	useEffect(() => {
 		const availableProducts = props.products.map((product) => ({
@@ -22,6 +24,7 @@ const Home: NextPage<{ products: productsFromDB[] }> = (props) => {
 			price: product.price,
 			key: product.id,
 			id: product.id,
+			blockade: product.blockade,
 		}));
 		dispatch(setAvailableProducts(availableProducts));
 	}, []);
@@ -50,6 +53,7 @@ export async function getStaticProps() {
 				title: product.title,
 				price: product.price,
 				url: product.url,
+				blockade: product.blockade,
 				id: product._id.toString(),
 			})),
 		},

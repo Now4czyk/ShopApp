@@ -35,6 +35,7 @@ const ModificationChange = () => {
 								url: product.url,
 								id: product.id,
 								price: product.price,
+								blockade: product.blockade,
 							}}
 						/>
 					))}

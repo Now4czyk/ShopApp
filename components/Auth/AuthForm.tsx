@@ -45,6 +45,8 @@ const AuthForm: React.FC<{
 	const [enteredEmail, setEnteredEmail] = useState('');
 	const [enteredPassword, setEnteredPassword] = useState('');
 	const [isLogin, setIsLogin] = useState(true);
+	const [isAuthError, setIsAuthError] = useState(false);
+	const [errorMessage, setErrorMessage] = useState('');
 	const emailInput = useRef<HTMLInputElement>(null);
 	const passwordInput = useRef<HTMLInputElement>(null);
 	const dispatch = useDispatch();
@@ -70,6 +72,7 @@ const AuthForm: React.FC<{
 	//handling form submission
 	const submissionHandler = (event: React.FormEvent) => {
 		event.preventDefault();
+		setIsAuthError(false);
 		setIsEmailValid(enteredEmail.includes('@'));
 		setIsPasswordValid(enteredPassword.trim().length > 6);
 		if (
@@ -125,7 +128,8 @@ const AuthForm: React.FC<{
 				})
 				//handling error
 				.catch((error) => {
-					alert(error.response.data.error.message);
+					setIsAuthError(true);
+					setErrorMessage(error.response.data.error.message);
 				});
 		}
 	};
@@ -169,6 +173,7 @@ const AuthForm: React.FC<{
 				) : (
 					''
 				)}
+				{isAuthError && <p className={classes.errorMessage}>{errorMessage}</p>}
 				<button type='submit' className={classes.btnSubmit}>
 					Continue
 				</button>

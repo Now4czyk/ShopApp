@@ -11,6 +11,7 @@ const ModificationChangeListItem: React.FC<{
 		url: string;
 		id: string;
 		price: number;
+		blockade: boolean;
 	};
 }> = (props) => {
 	const [enteredTitle, setEnteredTitle] = useState(props.product.title);
@@ -23,6 +24,8 @@ const ModificationChangeListItem: React.FC<{
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const dispatch = useDispatch();
 	const router = useRouter();
+
+	console.log(`ListItem: ${props.product.title} - ${props.product.blockade}`);
 
 	//handling visibility of a section with a form
 	const sectionVisibilityHandler = () => {
@@ -75,7 +78,6 @@ const ModificationChangeListItem: React.FC<{
 
 	//handling deletion of an element
 	const deleteHandler = () => {
-		console.log(props.product.id);
 		axios
 			.delete('/api/change-product', { data: { id: props.product.id } })
 			.then(() => {
@@ -91,28 +93,31 @@ const ModificationChangeListItem: React.FC<{
 	//handliing form submission
 	const formSubmission = (event: React.FormEvent) => {
 		event.preventDefault();
-		setIsSubmitted(true);
-		if (isValidTitle && isValidPrice && isValidUrl) {
-			setIsEditing(!isEditing);
-			setIsSubmitted(false);
-			const data = {
-				title: enteredTitle,
-				url: enteredUrl,
-				price: enteredPrice,
-			};
-			axios
-				.put('/api/change-product', {
-					id: props.product.id,
-					change: data,
-				})
-				.then(() => {
-					dispatch(setNavsStates(false));
-					dispatch(setNav({ navName: 'userPerspective', isActive: true }));
-					router.push('./');
-				})
-				.catch((error) => {
-					alert(error.response.statusText);
-				});
+		setIsEditing(!isEditing);
+		if (enteredPrice || enteredTitle || enteredUrl) {
+			setIsSubmitted(true);
+			if (isValidTitle && isValidPrice && isValidUrl) {
+				setIsEditing(!isEditing);
+				setIsSubmitted(false);
+				const data = {
+					title: enteredTitle,
+					url: enteredUrl,
+					price: enteredPrice,
+				};
+				axios
+					.put('/api/change-product', {
+						id: props.product.id,
+						change: data,
+					})
+					.then(() => {
+						dispatch(setNavsStates(false));
+						dispatch(setNav({ navName: 'userPerspective', isActive: true }));
+						router.push('./');
+					})
+					.catch((error) => {
+						alert(error.response.statusText);
+					});
+			}
 		}
 	};
 
@@ -139,11 +144,13 @@ const ModificationChangeListItem: React.FC<{
 								className={classes.edit}>
 								Edit
 							</button>
-							<img
-								onClick={deleteHandler}
-								className={classes.deleteImg}
-								src='https://cdn.iconscout.com/icon/free/png-256/close-1912235-1617704.png'
-							/>
+							{!props.product.blockade && (
+								<img
+									onClick={deleteHandler}
+									className={classes.deleteImg}
+									src='https://cdn.iconscout.com/icon/free/png-256/close-1912235-1617704.png'
+								/>
+							)}
 						</div>
 					)}
 				</div>
