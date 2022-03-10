@@ -1,7 +1,19 @@
-.container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    width: 98%;
-    margin: auto;
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width: 98%;
+	margin: auto;
+	animation: appearSmoothly 0.5s ease-in-out forwards;
+}
+
+@keyframes appearSmoothly {
+	0% {
+		opacity: 0;
+		transform: translateY(20%);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }

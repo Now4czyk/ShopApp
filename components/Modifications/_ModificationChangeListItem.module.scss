@@ -81,6 +81,7 @@
 					background-color: $button-color;
 					line-height: 0.8rem;
 					font-size: 1rem;
+					transition: background-color 0.15s linear;
 					@include mobile {
 						height: 4rem;
 						width: 10rem;
@@ -91,12 +92,17 @@
 					&:hover {
 						background-color: $button-clicked-color;
 						cursor: pointer;
+						transition: background-color 0.15s linear;
 					}
 				}
 				.deleteImg {
+					transition: background-color 0.15s linear;
 					@include mobile {
 						height: 4rem;
 						width: 4rem;
+					}
+					&:hover {
+						transition: background-color 0.15s linear;
 					}
 				}
 				.cancel {
@@ -162,6 +168,7 @@
 				background-color: $button-color;
 				line-height: 0.8rem;
 				font-size: 1rem;
+				transition: background-color 0.15s linear;
 				@include mobile {
 					height: 4rem;
 					width: 12rem;
@@ -172,6 +179,7 @@
 				&:hover {
 					background-color: $button-clicked-color;
 					cursor: pointer;
+					transition: background-color 0.15s linear;
 				}
 			}
 		}

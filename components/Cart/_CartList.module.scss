@@ -9,6 +9,7 @@
 	border-radius: 1rem;
 	box-shadow: 0 0 3px 0px black;
 	background-color: white;
+	animation: appearSmoothly 0.5s ease-in-out forwards;
 	@include mobile {
 		width: 100%;
 	}
@@ -70,7 +71,8 @@
 			background-color: $button-color;
 			line-height: 0.8rem;
 			font-size: 1rem;
-			@include mobile{
+			transition: background-color 0.15s linear;
+			@include mobile {
 				height: 4rem;
 				padding: 0 2.5rem;
 				border-radius: 2.5rem;
@@ -79,6 +81,7 @@
 			&:hover {
 				background-color: $button-clicked-color;
 				cursor: pointer;
+				transition: background-color 0.15s linear;
 			}
 		}
 		.isEmpty {
@@ -88,5 +91,16 @@
 				cursor: auto;
 			}
 		}
+	}
+}
+
+@keyframes appearSmoothly {
+	0% {
+		opacity: 0;
+		transform: translateY(20%);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
 	}
 }

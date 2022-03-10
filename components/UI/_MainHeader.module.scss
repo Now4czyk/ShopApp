@@ -20,6 +20,8 @@
 		height: 16rem;
 	}
 	.title {
+		display: inline-block;
+		position: relative;
 		font-size: 1.8rem;
 		cursor: pointer;
 		@include tablet {
@@ -28,6 +30,20 @@
 		@include mobile {
 			margin-top: 2rem;
 			font-size: 7rem;
+		}
+		&:after {
+			content: '';
+			position: absolute;
+			width: 100%;
+			transform: scaleX(0);
+			height: 3px;
+			bottom: 0;
+			left: 0;
+			background-color: $button-color;
+			transition: transform 0.25s ease-out;
+		}
+		&:hover:after {
+			transform: scaleX(1);
 		}
 	}
 	.actions {
@@ -40,8 +56,10 @@
 		}
 		.ul {
 			display: flex;
-			list-style: none;	
+			list-style: none;
 			li {
+				display: inline-block;
+				position: relative;
 				width: 9rem;
 				height: 3rem;
 				border-right: 2px rgb(104, 104, 104) solid;
@@ -52,39 +70,67 @@
 					width: 10rem;
 				}
 				@include mobile {
-					height: 4rem;
+					height: 5rem;
 					width: 20rem;
 					line-height: 4rem;
 					font-size: 2.4rem;
 				}
+				&.animation:after {
+					content: '';
+					position: absolute;
+					width: 100%;
+					transform: scaleX(0);
+					height: 3px;
+					bottom: 0;
+					left: 0;
+					background-color: $button-color;
+					transition: transform 0.25s ease-out;
+				}
+				&.animation:hover:after {
+					transform: scaleX(1);
+				}
+				&.active {
+					border-bottom: 4px solid $button-color;
+				}
 				&:last-child {
-					border: none;
+					border-right: none;
 				}
 				&:hover {
-					background-color: rgb(102, 102, 102);
 					color: white;
 				}
-				&.usePerspective {
-					width: 13rem;
+				&.userPerspective {
+					width: 15rem;
 					@include mobile {
 						width: 23rem;
 					}
 				}
-			}
-			.counter {
-				margin-left: 0.6rem;
-				padding: 0.2rem 0.7rem;
-				border-radius: 1rem;
-				background-color: $button-color;
-				color: black;
-				@include tablet {
-					border-radius: 1.5rem;
+				.counter {
+					margin-left: 0.6rem;
+					padding: 0.2rem 0.7rem;
+					border-radius: 1rem;
+					background-color: $button-color;
+					color: black;
+					@include tablet {
+						border-radius: 1.5rem;
+					}
+					@include mobile {
+						padding: 0.3rem 1.5rem;
+						border-radius: 1.8rem;
+					}
 				}
-				@include mobile {
-					padding: 0.3rem 1.5rem;
-					border-radius: 1.8rem;
+				.bump {
+					animation: bump 0.3s ease-out;
 				}
 			}
 		}
+	}
+}
+
+@keyframes bump {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
 	}
 }

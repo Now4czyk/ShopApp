@@ -11,6 +11,7 @@
 	border-radius: 1rem;
 	box-shadow: 0 0 3px 0px black;
 	background-color: white;
+	animation: appearSmoothly 0.5s ease-in-out forwards;
 	@include mobile {
 		width: 100%;
 	}
@@ -21,5 +22,16 @@
 		@include mobile {
 			font-size: 3rem;
 		}
+	}
+}
+
+@keyframes appearSmoothly {
+	0% {
+		opacity: 0;
+		transform: translateY(20%);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
 	}
 }
