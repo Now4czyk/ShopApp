@@ -33,7 +33,10 @@ const ProductDetails: React.FC<{ id: string }> = (props) => {
 	const quantity = cartData.reduce((sum, product) => {
 		return sum + product.quantity;
 	}, 0);
-	const { url, title, price, id } = choosenProduct;
+	const url = choosenProduct!.url;
+	const title = choosenProduct!.title;
+	const price = choosenProduct!.price;
+	const id = choosenProduct!.id;
 	const isFavorite = favoritesData.find((product) => product.id === props.id);
 	const product = {
 		url,

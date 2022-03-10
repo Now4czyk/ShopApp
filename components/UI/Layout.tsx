@@ -9,10 +9,21 @@ const Layout: React.FC = (props) => {
 
 	return (
 		<>
-			{authData.isAdmin && <div className={classes.adminBelt}>Admin Mode</div>}
+			{authData.isAdmin && (
+				<div className={`${classes.adminBelt} ${classes.isMargin}`}>
+					Admin Mode
+				</div>
+			)}
 			<MainHeader />
-			<div className={classes.card}>{props.children}</div>
-			<Footer/>
+			<div
+				className={
+					authData.isAdmin
+						? classes.card
+						: `${classes.card} ${classes.isMargin}`
+				}>
+				{props.children}
+			</div>
+			<Footer />
 		</>
 	);
 };

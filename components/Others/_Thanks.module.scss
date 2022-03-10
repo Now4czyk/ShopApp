@@ -1,7 +1,12 @@
+@import '../../scss/breakpoints';
+
 .thanks {
 	font-size: 1.7rem;
 	text-align: center;
 	animation: appearSmoothly 0.5s ease-in-out forwards;
+	@include mobile {
+		font-size: 3rem;
+	}
 }
 
 @keyframes appearSmoothly {
