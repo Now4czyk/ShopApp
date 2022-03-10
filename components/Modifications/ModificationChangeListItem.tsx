@@ -25,8 +25,6 @@ const ModificationChangeListItem: React.FC<{
 	const dispatch = useDispatch();
 	const router = useRouter();
 
-	console.log(`ListItem: ${props.product.title} - ${props.product.blockade}`);
-
 	//handling visibility of a section with a form
 	const sectionVisibilityHandler = () => {
 		setIsEditing(!isEditing);
@@ -90,34 +88,32 @@ const ModificationChangeListItem: React.FC<{
 			});
 	};
 
-	//handliing form submission
+	//handling form submission
 	const formSubmission = (event: React.FormEvent) => {
 		event.preventDefault();
-		setIsEditing(!isEditing);
-		if (enteredPrice || enteredTitle || enteredUrl) {
-			setIsSubmitted(true);
-			if (isValidTitle && isValidPrice && isValidUrl) {
-				setIsEditing(!isEditing);
-				setIsSubmitted(false);
-				const data = {
-					title: enteredTitle,
-					url: enteredUrl,
-					price: enteredPrice,
-				};
-				axios
-					.put('/api/change-product', {
-						id: props.product.id,
-						change: data,
-					})
-					.then(() => {
-						dispatch(setNavsStates(false));
-						dispatch(setNav({ navName: 'userPerspective', isActive: true }));
-						router.push('./');
-					})
-					.catch((error) => {
-						alert(error.response.statusText);
-					});
-			}
+		setIsSubmitted(true);
+		if (isValidTitle && isValidPrice && isValidUrl) {
+			setIsEditing(!isEditing);
+			setIsSubmitted(false);
+			const data = {
+				title: enteredTitle,
+				url: enteredUrl,
+				price: enteredPrice,
+				blockade: props.product.blockade,
+			};
+			axios
+				.put('/api/change-product', {
+					id: props.product.id,
+					change: data,
+				})
+				.then(() => {
+					dispatch(setNavsStates(false));
+					dispatch(setNav({ navName: 'userPerspective', isActive: true }));
+					router.push('./');
+				})
+				.catch((error) => {
+					alert(error.response.statusText);
+				});
 		}
 	};
 

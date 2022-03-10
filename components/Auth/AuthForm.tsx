@@ -3,7 +3,11 @@ import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { authInfo, cartLoggedOutInfo } from '../../store/store';
+import {
+	authInfo,
+	availableProductsInfo,
+	cartLoggedOutInfo,
+} from '../../store/store';
 import {
 	changeTryToAddSthValue,
 	login,
@@ -51,6 +55,7 @@ const AuthForm: React.FC<{
 	const passwordInput = useRef<HTMLInputElement>(null);
 	const dispatch = useDispatch();
 	const authData = useSelector(authInfo);
+	const availableProductsData = useSelector(availableProductsInfo);
 	const cartLoggedOutData = useSelector(cartLoggedOutInfo);
 	const router = useRouter();
 
@@ -98,7 +103,19 @@ const AuthForm: React.FC<{
 				.then((response) => {
 					const data = response.data;
 					dispatch(login(data.localId));
+					//checking whether admin changed values of products
 					const cart = props.carts.find((cart) => cart.id === data.localId);
+					cart?.cart.forEach((position) => {
+						const productFromDB = availableProductsData.find(
+							(product) => product.id === position.id
+						);
+						if (position.title !== productFromDB!.title)
+							position.title = productFromDB!.title;
+						if (position.price !== productFromDB!.price)
+							position.price = productFromDB!.price;
+						if (position.url !== productFromDB!.url)
+							position.url = productFromDB!.url;
+					});
 					dispatch(setCart(cart?.cart));
 					if (authData.tryToAddSthBeingLoggedOut) {
 						dispatch(addToCart(cartLoggedOutData));
@@ -115,9 +132,21 @@ const AuthForm: React.FC<{
 							})
 						);
 					}
+					//checking whether admin changed values of products
 					const favorites = props.favorites.find(
 						(favorite) => favorite.id === data.localId
 					);
+					favorites?.favorites.forEach((position) => {
+						const productFromDB = availableProductsData.find(
+							(product) => product.id === position.id
+						);
+						if (position.title !== productFromDB!.title)
+							position.title = productFromDB!.title;
+						if (position.price !== productFromDB!.price)
+							position.price = productFromDB!.price;
+						if (position.url !== productFromDB!.url)
+							position.url = productFromDB!.url;
+					});
 					dispatch(setFavorites(favorites?.favorites));
 					if (data.localId === 'GZZ23nXcQTVdWBunP2zYX1zhoXF3') {
 						dispatch(setAdmin(true));
@@ -129,7 +158,7 @@ const AuthForm: React.FC<{
 				//handling error
 				.catch((error) => {
 					setIsAuthError(true);
-					setErrorMessage(error.response.data.error.message);
+					setErrorMessage(error.response);
 				});
 		}
 	};

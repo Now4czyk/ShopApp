@@ -44,7 +44,7 @@ const ModificationAdd: React.FC = () => {
 		}
 	};
 	const priceHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setEnteredPrice(event.target.value);
+		setEnteredPrice(parseFloat(event.target.value).toFixed(2));
 		const re = /^[+-]?\d+(\.\d+)?$/;
 		if (re.test(event.target.value) && event.target.value.length <= 8) {
 			setIsValidPrice(true);

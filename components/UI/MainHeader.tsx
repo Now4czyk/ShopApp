@@ -61,7 +61,6 @@ const MainHeader = () => {
 		};
 	}, [cartCounter]);
 	useEffect(() => {
-		console.log(favoriteCounter);
 		if (favoriteCounter === 0) {
 			return;
 		}

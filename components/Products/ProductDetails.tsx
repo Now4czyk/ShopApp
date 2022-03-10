@@ -89,7 +89,6 @@ const ProductDetails: React.FC<{ id: string }> = (props) => {
 				size: sizeInput,
 			};
 			if (authData.isLoggedIn && quantity + quantityInput < 1000) {
-				console.log('ordering....');
 				dispatch(addToCart(data));
 				setMaxQuantity(false);
 			} else if (authData.isLoggedIn && quantity + quantityInput >= 1000) {
