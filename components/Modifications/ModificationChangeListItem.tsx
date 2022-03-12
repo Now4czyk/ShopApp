@@ -135,17 +135,19 @@ const ModificationChangeListItem: React.FC<{
 					</div>
 					{!isEditing && (
 						<div className={classes.actions}>
-							<button
-								onClick={sectionVisibilityHandler}
-								className={classes.edit}>
-								Edit
-							</button>
 							{!props.product.blockade && (
-								<img
-									onClick={deleteHandler}
-									className={classes.deleteImg}
-									src='https://cdn.iconscout.com/icon/free/png-256/close-1912235-1617704.png'
-								/>
+								<>
+									<button
+										onClick={sectionVisibilityHandler}
+										className={classes.edit}>
+										Edit
+									</button>
+									<img
+										onClick={deleteHandler}
+										className={classes.deleteImg}
+										src='https://cdn.iconscout.com/icon/free/png-256/close-1912235-1617704.png'
+									/>
+								</>
 							)}
 						</div>
 					)}
