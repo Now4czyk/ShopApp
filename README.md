@@ -1,34 +1,100 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Description
 
-## Getting Started
+The project is an example of a basic e-commerce app. It includes a perspective of a casual user(overlooking content) as well as a special perspective for Admin Profile(adding, removing or changing content on a website).
 
-First, run the development server:
+# Technologies
 
-```bash
+- ReactJS
+- Typescript
+- NextJS
+- Redux
+- SCSS
+- MongoDB
+- FireBase(Authentication)
+
+#Run in a browser
+https://now4czyk-reactshop.netlify.app/
+
+# Run locally
+
+Download the repository and type in terminal
+
+```
+npm install
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#User Profile
+###Logged out Perspective
+Initially, users are not logged in. Therefore, they can use a website only for overlooking products.
+![](https://github.com/Now4czyk/ShopAppProject/blob/main/assets/logged-out-perspetive.png)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+> Logged Out Perspective
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+###Authentication Page
+When users want to add products to a cart or a favorites list, they are redirected to the Authentication Page. Here, they are asked to sign in or create an account.
+![](https://github.com/Now4czyk/ShopAppProject/blob/main/assets/authentication.png)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+> Authentication Page
 
-## Learn More
+> ###Logged in Perspective
+> After succesful authentication users are redirected to the Main Page. Here, they can enjoy adding products to a cart or a favorites list.
+> ![](https://github.com/Now4czyk/ShopAppProject/blob/main/assets/logged-in-perspective.png)
 
-To learn more about Next.js, take a look at the following resources:
+> Logged In Perspective
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+###Product Details Page
+Each product has its dedicated page on which users can choose a size and a quantity of a product that they want to order.
+![](https://github.com/Now4czyk/ShopAppProject/blob/main/assets/product-details.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+> Product Details Page
 
-## Deploy on Vercel
+###Cart
+On Cart Page users can take a look at products they added to a cart. Here they are allowed to remove products or increase/decrease products' quantity.
+![](https://github.com/Now4czyk/ShopAppProject/blob/main/assets/cart.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> Cart Page
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Moreover, they can finish a purchase completing in a correct way Cart Form.
+![](https://github.com/Now4czyk/ShopAppProject/blob/main/assets/cart-form.png)
+
+> Cart Form
+
+###Favorites
+On Favorites Page users can take a look at products they added to a favorites list (by clicking heart next to a product's title). Additionally, they are allowed to remove products from the favorites list.
+![](https://github.com/Now4czyk/ShopAppProject/blob/main/assets/favorites.png)
+
+> Favorites Page
+
+#Admin Profile
+###Logging Into Admin Profile
+To test the Admin Perspective you need to log in with the data:
+
+```
+email : admin@admin.com
+password: admin12
+```
+
+###User Perspective View
+User Perspective Page allows admin to take a look at the main page of a shop to observe the implementation of its changes.
+![](https://github.com/Now4czyk/ShopAppProject/blob/main/assets/admin-perspective.png)
+
+> Admin Profile: User Perspective Page
+
+###Modification Page
+Modification Page is a heart of Admin Profile. Here, admin is allowed to add a new product as well as change available one.
+![](https://github.com/Now4czyk/ShopAppProject/blob/main/assets/modification-page.png)
+
+> Modification Page
+
+###Add a New Product
+The section allows admin to add a new product to an offer. Due to visual aspects it is recommendable to paste an url to image with size: 800x1155px.
+![](https://github.com/Now4czyk/ShopAppProject/blob/main/assets/add-a-new-product.png)
+
+> Add a New Product
+
+###Change Available PRoducts
+The section allows admin to change products that are currently in an offer. However, there are 8 products in an offer that cannot be modified because they exists as dummy content. If there are no products that have button to edit/delete a product then you need to first add a product in the Add a New Product Section. Unfortunately, the process of posting a new products or applying changes to an exisitng product takes around 1,5min.
+![](https://github.com/Now4czyk/ShopAppProject/blob/main/assets/change-exisitng-product.png)
+
+> Change an Exisisting Product
