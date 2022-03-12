@@ -12,7 +12,8 @@ The project is an example of a basic e-commerce app. It includes a perspective o
 - MongoDB
 - FireBase(Authentication)
 
-#Run in a browser
+# Run in a browser
+
 https://now4czyk-reactshop.netlify.app/
 
 # Run locally
@@ -44,7 +45,7 @@ When users want to add products to a cart or a favorites list, they are redirect
 
 ### Logged in Perspective
 
-After succesful authentication users are redirected to the Main Page. Here, they can enjoy adding products to a cart or a favorites list.
+After successful authentication users are redirected to the Main Page. Here, they can enjoy adding products to a cart or a favorites list.
 
 ![](https://github.com/Now4czyk/ShopAppProject/blob/main/assets/logged-in-perspective.png)
 
@@ -109,7 +110,7 @@ Modification Page is a heart of Admin Profile. Here, admin is allowed to add a n
 
 ### Add a New Product
 
-The section allows admin to add a new product to an offer. Due to visual aspects it is recommendable to paste an url to image with size: 800x1155px.
+The section allows admin to add a new product to an offer. Due to visual aspects it is recommendable to paste an url to an image with size: 800x1155px.
 
 ![](https://github.com/Now4czyk/ShopAppProject/blob/main/assets/add-a-new-product.png)
 
@@ -117,8 +118,11 @@ The section allows admin to add a new product to an offer. Due to visual aspects
 
 ### Change Available PRoducts
 
-The section allows admin to change products that are currently in an offer. However, there are 8 products in an offer that cannot be modified because they exists as dummy content. If there are no products that have button to edit/delete a product then you need to first add a product in the Add a New Product Section. Unfortunately, the process of posting a new products or applying changes to an exisitng product takes around 1,5min.
+The section allows admin to change products that are currently in an offer. However, there are 8 products in an offer that cannot be modified because they exists as a dummy content. If there are no products that have buttons to edit/delete a product then you need to first add a product in the Add a New Product Section. The process of posting a new product or applying changes to an exisitng product takes around 1,5min.
 
 ![](https://github.com/Now4czyk/ShopAppProject/blob/main/assets/change-exisitng-product.png)
 
 > Change an Exisisting Product
+
+### Mobile Version
+I highly recommend to visit my ReactShop in a mobile version.
