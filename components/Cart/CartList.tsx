@@ -1,16 +1,18 @@
 import classes from './_CartList.module.scss';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { cartInfo } from '../../store/store';
 import CartItem from './CartItem';
 import CartForm from './CartForm';
+import { setNav, setNavsStates } from '../../store/Slices/underlinedNavSlice';
 
 const CartList = () => {
 	const [isOrderClicked, setIsOrderClicked] = useState(false);
 	const [maxQuantity, setMaxQuantity] = useState(false);
 	const cartData = useSelector(cartInfo);
 	const router = useRouter();
+	const dispatch = useDispatch();
 
 	//handling data from a Cart
 	const quantity = cartData.reduce((curNum, product) => {
@@ -22,6 +24,8 @@ const CartList = () => {
 
 	//handling buttons
 	const continueShoppingHandler = () => {
+		dispatch(setNavsStates(false));
+		dispatch(setNav({ navName: 'cart', isActive: true }));
 		router.push('/');
 	};
 	const orderHandler = () => {

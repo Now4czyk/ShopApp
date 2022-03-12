@@ -15,7 +15,6 @@ type productsFromDB = {
 };
 
 const Home: NextPage<{ products: productsFromDB[] }> = (props) => {
-
 	const dispatch = useDispatch();
 	useEffect(() => {
 		const availableProducts = props.products.map((product) => ({
