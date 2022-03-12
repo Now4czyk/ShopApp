@@ -2,6 +2,7 @@ import classes from './_AuthForm.module.scss';
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import { Dispatch } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	authInfo,
@@ -37,6 +38,72 @@ type favoritesData = {
 	title: string;
 	price: number;
 };
+
+type availableProductsData = {
+	url: string;
+	title: string;
+	price: number;
+	key: string;
+	id: string;
+	blockade: boolean;
+};
+
+//start function
+const checkForAdminChanges = (
+	dispatch: Dispatch<any>,
+	elements: any,
+	data: any,
+	availableProductsData: availableProductsData[],
+	setElements: (payload: any) => void,
+	isCart: boolean
+) => {
+	let element = elements.find(
+		(
+			element:
+				| {
+						id: string;
+						cart: cartData[];
+				  }
+				| {
+						id: string;
+						favorites: favoritesData[];
+				  }
+		) => element.id === data.localId
+	);
+	let array;
+	if (isCart) {
+		array = element?.cart;
+	} else {
+		array = element?.favorites;
+	}
+	array.forEach((position: cartData | favoritesData) => {
+		const productFromDB = availableProductsData.find(
+			(product) => product.id === position.id
+		);
+		if (productFromDB !== undefined) {
+			if (position.title !== productFromDB!.title)
+				position.title = productFromDB!.title;
+			if (position.price !== productFromDB!.price)
+				position.price = productFromDB!.price;
+			if (position.url !== productFromDB!.url)
+				position.url = productFromDB!.url;
+		}
+	});
+	dispatch(
+		setElements(
+			array.filter((position: cartData | favoritesData) => {
+				const index = availableProductsData.find(
+					(product) => product.id === position.id
+				);
+				return availableProductsData.find(
+					(product) => product.id === position.id
+				);
+			})
+		)
+	);
+};
+
+//finish function
 
 const AuthForm: React.FC<{
 	carts: { id: string; cart: cartData[] }[];
@@ -103,20 +170,23 @@ const AuthForm: React.FC<{
 				.then((response) => {
 					const data = response.data;
 					dispatch(login(data.localId));
-					//checking whether admin changed values of products
-					const cart = props.carts.find((cart) => cart.id === data.localId);
-					cart?.cart.forEach((position) => {
-						const productFromDB = availableProductsData.find(
-							(product) => product.id === position.id
-						);
-						if (position.title !== productFromDB!.title)
-							position.title = productFromDB!.title;
-						if (position.price !== productFromDB!.price)
-							position.price = productFromDB!.price;
-						if (position.url !== productFromDB!.url)
-							position.url = productFromDB!.url;
-					});
-					dispatch(setCart(cart?.cart));
+					//checking cart and favorites whether admin changed values of products
+					checkForAdminChanges(
+						dispatch,
+						props.carts,
+						data,
+						availableProductsData,
+						setCart,
+						true
+					);
+					checkForAdminChanges(
+						dispatch,
+						props.favorites,
+						data,
+						availableProductsData,
+						setFavorites,
+						false
+					);
 					if (authData.tryToAddSthBeingLoggedOut) {
 						dispatch(addToCart(cartLoggedOutData));
 						dispatch(changeTryToAddSthValue(false));
@@ -132,22 +202,6 @@ const AuthForm: React.FC<{
 							})
 						);
 					}
-					//checking whether admin changed values of products
-					const favorites = props.favorites.find(
-						(favorite) => favorite.id === data.localId
-					);
-					favorites?.favorites.forEach((position) => {
-						const productFromDB = availableProductsData.find(
-							(product) => product.id === position.id
-						);
-						if (position.title !== productFromDB!.title)
-							position.title = productFromDB!.title;
-						if (position.price !== productFromDB!.price)
-							position.price = productFromDB!.price;
-						if (position.url !== productFromDB!.url)
-							position.url = productFromDB!.url;
-					});
-					dispatch(setFavorites(favorites?.favorites));
 					if (data.localId === 'GZZ23nXcQTVdWBunP2zYX1zhoXF3') {
 						dispatch(setAdmin(true));
 					}
