@@ -40,10 +40,10 @@ When users want to add products to a cart or a favorites list, they are redirect
 
 > Authentication Page
 
-> ### Logged in Perspective
+### Logged in Perspective
 
-> After succesful authentication users are redirected to the Main Page. Here, they can enjoy adding products to a cart or a favorites list.
-> ![](https://github.com/Now4czyk/ShopAppProject/blob/main/assets/logged-in-perspective.png)
+After succesful authentication users are redirected to the Main Page. Here, they can enjoy adding products to a cart or a favorites list.
+![](https://github.com/Now4czyk/ShopAppProject/blob/main/assets/logged-in-perspective.png)
 
 > Logged In Perspective
 
