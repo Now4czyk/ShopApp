@@ -6,7 +6,7 @@ type data = {
 	isActive: boolean;
 };
 
-interface initialValues {
+type initialValues = {
 	data: data[];
 }
 

@@ -10,7 +10,7 @@ type data = {
 	blockade: boolean;
 };
 
-interface initialValues {
+type initialValues = {
 	data: data[];
 }
 

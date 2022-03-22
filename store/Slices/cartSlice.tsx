@@ -11,7 +11,7 @@ export type data = {
 	size: string;
 };
 
-interface initialValues {
+type initialValues = {
 	data: data[];
 	cartLoggedOut: data;
 }

@@ -8,7 +8,7 @@ export type data = {
 	id: string;
 };
 
-interface initialValues {
+type initialValues = {
 	data: data[];
 }
 

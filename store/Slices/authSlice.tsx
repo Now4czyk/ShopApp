@@ -8,7 +8,7 @@ type data = {
 	tryToAddSthBeingLoggedOut: boolean;
 };
 
-interface initialValues {
+type initialValues = {
 	data: data;
 }
 
