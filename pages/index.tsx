@@ -15,7 +15,7 @@ type productsFromDB = {
 };
 
 const Home: NextPage<{ products: productsFromDB[] }> = (props) => {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch();	
 	useEffect(() => {
 		const availableProducts = props.products.map((product) => ({
 			url: product.url,
@@ -41,9 +41,7 @@ const Home: NextPage<{ products: productsFromDB[] }> = (props) => {
 export default Home;
 
 export async function getStaticProps() {
-	const client = await MongoClient.connect(
-		'mongodb+srv://Now4czyk:Kacpern30@cluster0.h0u5c.mongodb.net/ProductsDB?retryWrites=true&w=majority'
-	);
+	const client = await MongoClient.connect(process.env.NEXT_PUBLIC_DB);
 	const products = await client.db().collection('Products').find().toArray();
 	client.close();
 	return {
