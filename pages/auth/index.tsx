@@ -63,9 +63,7 @@ const AuthPage: NextPage<{
 export default AuthPage;
 
 export async function getStaticProps() {
-	const client = await MongoClient.connect(
-		'mongodb+srv://Now4czyk:Kacpern30@cluster0.h0u5c.mongodb.net/ProductsDB?retryWrites=true&w=majority'
-	);
+	const client = await MongoClient.connect(process.env.NEXT_PUBLIC_DB);
 	const carts = await client.db().collection('Carts').find().toArray();
 	const favorites = await client.db().collection('Favorites').find().toArray();
 	client.close();

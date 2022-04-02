@@ -153,11 +153,9 @@ const AuthForm: React.FC<{
 		) {
 			let url = '';
 			if (isLogin) {
-				url =
-					'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD4CeSe6H1d5ZNjzB_gqTz88JZ9MQbKJPU';
+				url = process.env.NEXT_PUBLIC_SIGNIN;
 			} else {
-				url =
-					'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD4CeSe6H1d5ZNjzB_gqTz88JZ9MQbKJPU';
+				url = process.env.NEXT_PUBLIC_SIGNUP;
 			}
 
 			axios
@@ -202,17 +200,19 @@ const AuthForm: React.FC<{
 							})
 						);
 					}
-					if (data.localId === 'GZZ23nXcQTVdWBunP2zYX1zhoXF3') {
+					if (data.localId === process.env.NEXT_PUBLIC_ADMINID) {
 						dispatch(setAdmin(true));
 					}
 					dispatch(setNavsStates(false));
 					dispatch(setNav({ navName: 'userPerspective', isActive: true }));
 					router.push('/');
 				})
-				//handling error
 				.catch((error) => {
+					//handling error
 					setIsAuthError(true);
-					setErrorMessage(error.response);
+					if (isLogin) {
+						setErrorMessage(error.response.data.error.message);
+					}
 				});
 		}
 	};
